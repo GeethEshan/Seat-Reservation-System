@@ -1,0 +1,201 @@
+/* Popup container for centering */
+.popup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Adds space between popup and table */
+  width: 100%;
+}
+
+/* Popup error and feedback messages */
+.popup {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  width: 80%; /* Set the width of the popup */
+  max-width: 600px; /* Maximum width of the popup */
+}
+
+.error {
+  background-color: #ffcccc;
+  color: black;
+  border: 1px solid #ff5c5c;
+}
+
+.feedback {
+  background-color: #cce5ff;
+  color: black;
+  border: 1px solid #007bff;
+}
+
+/* General container styling */
+.my-reservations-container {
+  width: 97%; /* Make sure it covers the full width */
+  height: 100vh;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(-90deg, #00aaff, #aaffff);
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1500px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  margin-top: -10px;
+}
+
+/* Logo styling */
+.logo {
+  width: 150px;
+  height: auto;
+  position: relative;
+  top: 1px;
+  left: 20px;
+}
+
+/* Navigation items styling */
+.nav-items {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-items button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-items button:hover {
+  color: blue;
+}
+
+/* Heading styling */
+h2 {
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+/* Table styling */
+.reservations-table {
+  width: 95%;
+  max-width: 1200px;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-family: "Arial", sans-serif;
+  opacity: 0.9;
+}
+
+/* Table header and cell styling */
+.reservations-table th,
+.reservations-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  color: black;
+}
+
+.reservations-table th {
+  background-color: #0071c5;
+  color: white;
+}
+
+/* Cancel button styling */
+.cancel-button {
+  background-color: #ff5c5c;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #ff1a1a;
+}
+
+/* Pagination controls styling */
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-button {
+  background-color: #0071c5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #005a99;
+}
+
+.page-info {
+  font-size: 16px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .reservations-table {
+    display: block; /* Make the table a block element on small screens */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    white-space: nowrap;
+  }
+
+  .reservations-table thead {
+    display: none; /* Hide table headers on small screens */
+  }
+
+  .reservations-table tr {
+    display: flex; /* Use flexbox for rows */
+    flex-direction: column; /* Stack cells vertically */
+    margin-bottom: 10px; /* Space between rows */
+    text-align: left;
+    padding: 0%;
+
+  }
+
+  .reservations-table td {
+    text-align: left; /* Align cell text to the right */
+
+    border-top: 1px solid #ddd; /* Add border for separation */
+  }
+
+  .table_body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

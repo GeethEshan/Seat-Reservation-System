@@ -1,0 +1,67 @@
+.date-manager-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .date-manager-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .date-manager-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .date-card {
+    background-color: #f0f8ff; /* Light blue background */
+    border: 1px solid #87CEFA; /* Border color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px;
+    margin: 10px;
+    width: 150px; /* Set a fixed width */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; /* Animation effect */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .date-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+  }
+  
+  .weekday-label, .date-value {
+    display: block; /* Ensure each label appears on its own line */
+  }
+  
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px; /* Set a fixed width for the modal */
+  }
+  
+  .message-input {
+    width: 100%; /* Full width input field */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

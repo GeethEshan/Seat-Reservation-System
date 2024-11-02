@@ -1,0 +1,96 @@
+/* Center the content */
+.admin-page {
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  background-image: url("../images/reserve.jpg");
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center; /* Centers the image */
+  padding: 20px;
+}
+
+
+/* Back button */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 130px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.welcome-text {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: white; /* Font color set to white */
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; /* Thicker black outline */
+}
+
+
+/* Container for the cards */
+.cards-container1 {
+  display: flex; /* Use flexbox for horizontal alignment */
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  gap: 10px; /* Set a gap between cards */
+  max-width: 1000px; /* Set a maximum width for the cards container */
+  width: 100%; /* Allow full width for the container */
+  margin: 0 auto; /* Center the cards container */
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Style each card */
+.card1 {
+  background: linear-gradient(135deg, #aed1ef, #f2dfc1, #f0b9ef); /* Gradient background */
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 10px; /* Adjust padding for cards */
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.8); /* Heavy white shadow */
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 10px;
+  min-height: 150px; /* Set a minimum height for cards */
+  min-width: 150px; /* Set a minimum width for cards */
+  flex: 1 1 30%; /* Allow flexibility in width, adjust as necessary */
+}
+
+
+/* Hover animation for the card */
+.card1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-content1 h3 {
+  font-size: 20px; /* Adjust font size for the card titles */
+  margin-top: 10px;
+  color: black;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .card1 {
+    flex: 1 1 45%; /* 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .card1 {
+    flex: 1 1 100%; /* 1 card per row on extra small screens */
+  }
+}

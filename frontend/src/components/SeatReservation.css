@@ -1,0 +1,186 @@
+/* General container styling */
+.reservation-container {
+  background-image: url("../images/reserve.jpg"); /* Set background image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating of the background image */
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Add relative positioning for positioning the button */
+  min-height: 100vh; /* Ensure the container takes up the full viewport height */
+  display: flex; /* Use flexbox to center content */
+  flex-direction: column; /* Align items in a column */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+}
+
+/* Top bar styling */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  width: 95%; /* Ensure top bar takes full width */
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 20px; /* Added margin-top for the navbar */
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav items */
+  align-items: center; /* Align items vertically */
+  background: linear-gradient(
+    to right,
+    lightblue,
+    white
+  ); /* Gradient background */
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1200px; /* Limit the width of the navbar */
+}
+
+.nav-items {
+  display: flex;
+  gap: 15px; /* Space between buttons */
+  margin-left: auto; /* Push navigation items to the right */
+}
+
+.nav-items button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-items button:hover {
+  color: #007bff;
+}
+
+
+/* Reservation title styling */
+.reservation-title {
+  font-size: 36px; /* Increased font size */
+  color: #003366;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Reservation grid styling */
+.reservation-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(220px, 1fr)
+  ); /* Slightly increased minimum column width */
+  gap: 20px;
+  justify-content: center; /* Center the grid items */
+  max-width: 1200px; /* Limit the width of the grid */
+}
+
+/* Reservation card styling */
+.reservation-card {
+  background-color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Increased for a much heavier shadow */
+  padding: 24px; /* Slightly increased padding */
+  border-radius: 8px;
+  text-align: center;
+  height: 240px; /* Increased height of the cards */
+  transition: transform 0.3s, box-shadow 0.3s; /* Add transition for smooth animation */
+}
+
+.reservation-card:hover {
+  transform: translateY(-5px); /* Move the card up slightly */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.date-value {
+  display: block; /* Makes the date appear on its own line */
+  font-size: 18px; /* Slightly increased font size */
+  color: #666666;
+}
+
+.seats {
+  font-size: 18px; /* Slightly increased font size */
+  color: #666666;
+  margin-bottom: 18px; /* Slightly increased margin */
+}
+
+.seat-count {
+  font-size: 26px; /* Slightly increased font size */
+  color: #003366;
+  display: block;
+}
+
+.reserve-button {
+  background-color: #003366;
+  color: #ffffff;
+  padding: 12px 18px; /* Slightly increased padding */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem; /* Slightly increased font size */
+}
+
+.reserve-button:hover {
+  background-color: #0055a5;
+}
+
+.popup.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px; /* Slightly increased padding */
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin-top: 24px; /* Slightly increased margin */
+}
+
+.reservation-card.past-day {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.reservation-card.past-day .reserve-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Total seats title styling */
+.total-seats-title {
+  font-size: 26px; /* Increased font size */
+  color: #ffffff; /* White font color */
+  text-shadow: 1px 1px 2px #000000,
+    /* Black shadow for outline effect */ -1px -1px 2px #000000,
+    1px -1px 2px #000000, -1px 1px 2px #000000; /* Apply outline in all directions */
+}
+
+/* Checkbox styling */
+.history-table input[type="checkbox"] {
+  width: 16px; /* Adjust width */
+  height: 16px; /* Adjust height */
+  margin: 0; /* Remove default margin */
+  vertical-align: middle; /* Align vertically with text */
+}
+
+@media only screen and (max-width: 768px) {
+  .reservation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .total-seats {
+    margin-bottom: 80px;
+  }
+
+  .top-bar {
+    width: 95%;
+    margin-left: 80px;
+    margin-right: 60px;
+  }
+}

@@ -1,0 +1,158 @@
+/* Overall container styling */
+.trainees-container {
+  margin: 20px; /* Added margin to the entire page */
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(-90deg, #00aaff, #aaffff);
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* Logo styling */
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+/* Navigation items styling */
+.nav-items {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-items button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-items button:hover {
+  color: blue;
+}
+
+/* Title styling */
+.trainees-title {
+  text-align: center; /* Center the title */
+  margin-top: 20px; /* Added margin for spacing */
+}
+
+/* Table styling */
+.trainees-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.trainees-table th,
+.trainees-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.trainees-table th {
+  background-color: #0071c5;
+  color: white;
+}
+
+.trainees-table td {
+  color: black;
+}
+
+.trainees-table button {
+  margin-right: 5px; /* Reduced margin */
+  padding: 5px 8px; /* Reduced button width */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.trainees-table button:hover {
+  background-color: #005a99;
+  color: white;
+}
+
+/* Action buttons alignment */
+.action-buttons {
+  display: flex;
+  gap: 5px; /* Space between buttons */
+}
+
+/* Pagination styling */
+.pagination {
+  text-align: center; /* Center the pagination */
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px; /* Space between pagination buttons */
+  padding: 5px 10px;
+  border: 1px solid #0071c5;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.pagination button:hover {
+  background-color: #0071c5;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Make the navbar items stack vertically */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0%;
+  }
+
+  /* Make the title font smaller */
+  .trainees-title {
+    font-size: 1.5rem;
+  }
+
+  /* Make the table scrollable */
+  .trainees-table {
+    display: block;
+    overflow-x: auto; /* Add horizontal scrolling */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+
+  /* Style adjustments for table elements */
+  .trainees-table th,
+  .trainees-table td {
+    padding: 10px;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  /* Adjust button size */
+  .trainees-table button {
+    padding: 4px 6px; /* Smaller buttons */
+    font-size: 0.8rem;
+  }
+
+  /* Adjust pagination buttons */
+  .pagination button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}

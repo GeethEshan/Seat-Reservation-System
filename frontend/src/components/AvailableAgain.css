@@ -1,0 +1,24 @@
+.seat {
+    height: 40px; /* Fixed height for seats */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 14px; /* Adjust font size for better readability */
+    transition: background-color 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .seat {
+      height: 30px; /* Reduce seat height for smaller screens */
+      font-size: 12px; /* Adjust font size for better readability */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .seat {
+      height: 30px; /* Further reduce seat height on smaller screens */
+      font-size: 12px; /* Adjust font size for better readability */
+    }
+  }
+  

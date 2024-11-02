@@ -1,0 +1,187 @@
+.adminDashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+
+  background-size: cover;
+  overflow-x: hidden; /* Prevent horizontal scroll on smaller screens */
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(-90deg, #00aaff, #aaffff);
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1500px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+/* Navigation items styling */
+.navItems {
+  display: flex;
+  gap: 20px;
+}
+
+.navItems button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navItems button:hover {
+  color: blue;
+}
+
+/* Welcome message styling */
+.welcomeMessage {
+  margin-top: 10px;
+  color: white;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 1.5rem; /* Set font size for responsiveness */
+}
+
+/* Admin options container styling */
+.adminOptions {
+  display: flex;
+
+  gap: 20px; /* Add some space between columns */
+  /* Allow the items to wrap on smaller screens */
+}
+
+.leftSide,
+.rightSide {
+  width: 48%; /* Adjust to be responsive */
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for seat forms */
+.seatForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  opacity: 0.9;
+}
+
+/* Label and input styling */
+label {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+input[type="number"],
+.dropdown,
+.datePicker {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+.dropdown {
+  width: 200px;
+}
+/* Button styling */
+.dashboardButton {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.dashboardButton:hover {
+  background-color: #0088cc;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .adminOptions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leftSide,
+  .rightSide {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navItems {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .welcomeMessage {
+    font-size: 1.2rem; /* Decrease font size on smaller screens */
+  }
+}
+
+.scrollbars {
+  max-height: 300px; /* Adjust based on your layout */
+  overflow-y: auto; /* Enable vertical scrolling */
+  list-style-type: none; /* Remove default list style */
+  padding: 0;
+  margin: 0;
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+}
+
+/* Scrollbar styles for webkit browsers (Chrome, Safari) */
+.scrollbars::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.scrollbars::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+.scrollbars::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners for the scrollbar thumb */
+}
+
+.scrollbars::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}

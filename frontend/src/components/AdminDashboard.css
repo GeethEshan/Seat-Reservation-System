@@ -1,0 +1,149 @@
+body {
+  background-image: url("../images/bg1.jpg");
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container */
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between; /* Space out the button and title */
+  width: 100%; /* Take full width */
+  align-items: center; /* Center items vertically */
+}
+
+.dashboard-button1 {
+  background-color: #5da92f; /* Primary blue color */
+  color: #ffffff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth background transition */
+  width: 130px;
+}
+
+.dashboard-button1:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.sub-nav-title {
+  flex-grow: 1; /* Allow title to grow and center it */
+  text-align: center; /* Center the text */
+  font-size: 24px; /* Increase font size */
+  color: #7e7e7e; /* Gray color for the title */
+}
+
+.card-container2 {
+  display: flex;
+  flex-direction: row;
+  width: 900px;
+  /* Allow wrapping to new lines */
+  justify-content: center; /* Center the cards */
+  margin-bottom: 20px; /* Space below the card container */
+}
+
+.card2 {text-align: center;
+  width: 250px;
+  background: linear-gradient(135deg, rgb(174, 209, 239), rgb(242, 223, 193), rgb(240, 185, 239));
+  color: rgb(51, 51, 51);
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
+  transition: background 0.3s;
+}
+
+.card2:hover {
+  background-color: #e1e1e1; /* Darker gray on hover */
+}
+
+.date-picker-container {
+  margin-top: 20px; /* Margin above date picker */
+}
+
+.date-picker {
+  padding: 10px; /* Padding for date picker */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.selected-layout-container {
+  margin-top: 20px; /* Space above selected layout */
+  text-align: center; /* Center text */
+}
+
+.seat-grid {
+  display: grid; /* Use grid layout for seats */
+  grid-template-columns: repeat(10, 1fr); /* 10 equal columns */
+  gap: 5px; /* Space between seats */
+  margin: 20px 0; /* Space above and below grid */
+}
+
+.seat {
+  width: 50px; /* Fixed width for seats */
+  height: 50px; /* Fixed height for seats */
+  border: 1px solid #ccc; /* Light gray border for each seat */
+  display: flex; /* Center seat number */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-radius: 4px; /* Rounded corners */
+  transition: background 0.3s ease; /* Smooth background transition */
+}
+
+.seat:hover {
+  opacity: 0.8; /* Slightly fade seats on hover */
+}
+
+.reserved {
+  background-color: rgba(255, 200, 200, 0.5); /* Light red for reserved seats */
+}
+
+.unavailable {
+  background-color: rgba(
+    255,
+    165,
+    0,
+    0.5
+  ); /* Light orange for unavailable seats */
+}
+
+.selected {
+  background-color: rgba(
+    204,
+    255,
+    204,
+    0.5
+  ); /* Light green for selected seats */
+}
+
+.mark-button {
+  margin-top: 20px; /* Margin above button */
+  padding: 10px 20px; /* Padding for button */
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  transition: background 0.3s ease; /* Smooth background transition */
+}
+
+.mark-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.selected-layout-container p {
+  margin-top: 10px; /* Space above status messages */
+  color: #dc3545; /* Red color for error messages */
+}

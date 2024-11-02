@@ -1,0 +1,43 @@
+/* NavBar.css */
+
+.nav-bar {
+  background-color: #007bff;
+  padding: 10px 0;
+  color: #fff;
+  width: 100%; /* Full width for the navbar */
+  position: fixed; /* Keep the navbar fixed at the top */
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  flex-wrap: wrap; /* Allows the items to wrap if the screen size is small */
+  max-width: 90%; /* Constrain the nav items to 90% of the screen width */
+  margin: auto; /* Center the nav list horizontally */
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 14px; /* Slightly smaller font on smaller screens */
+    padding: 8px 10px; /* Adjust padding for smaller screens */
+  }
+
+  .nav-list {
+    justify-content: center; /* Center items on smaller screens */
+  }
+}

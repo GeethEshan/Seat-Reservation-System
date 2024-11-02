@@ -1,0 +1,139 @@
+/* SeatLayout.css */
+.seat-layout-container {
+  padding: 20px;
+  max-width: 1200px; /* Limit the max width for larger screens */
+  margin: auto;
+}
+
+.navbar2 {
+  background-color: blue;
+  padding: 10px;
+}
+
+.navbar-container2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-menu2 {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item2 a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+input {
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.layout-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: space-between; /* Space out the elements */
+}
+
+.drag-seats,
+.grid-layout {
+  flex: 1; /* Take equal space */
+  min-width: 300px; /* Minimum width for responsiveness */
+  margin: 10px;
+}
+
+.submit-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Add spacing between buttons */
+}
+
+.seat-icons {
+  display: flex;
+  flex-wrap: wrap; /* Wrap seats for smaller screens */
+  justify-content: space-around; /* Space seats evenly */
+  gap: 10px; /* Add spacing between seat icons */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .seat-layout-container {
+    padding: 10px;
+  }
+
+  .navbar-container2 {
+    flex-direction: column; /* Stack navbar items on smaller screens */
+  }
+
+  .action-buttons {
+    flex-direction: column; /* Stack action buttons */
+  }
+}
+
+.dashboard-button {
+  background-color: #5da92f;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 130px;
+}
+
+/* Additional Styles for Seat Layout Form */
+.create-new-layout-heading {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.total-seats-container,
+.layout-name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px; /* Add spacing between the two input fields */
+}
+
+.grid-layout {
+  margin-top: 20px; /* Space between seat icons and grid */
+}

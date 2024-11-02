@@ -1,0 +1,161 @@
+.signup-page {
+  display: flex;
+  height: 100vh;
+}
+
+.left-section {
+  width: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.right-section {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  position: relative;
+  padding: 20px;
+}
+
+.signup-container {
+  max-width: 430px;
+  width: 100%;
+  background: var(--SECONDARY);
+  border-radius: 7px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.signup-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #001329;
+  margin: 0.25rem 0; /* Reduced margin */
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  align-items: center; /* Aligns label and input field horizontally */
+  justify-content: space-between; /* Ensures label and input field are spaced correctly */
+  margin-bottom: 0.15rem; /* Further reduced margin */
+}
+
+label {
+  width: 50px; /* Reduce label width */
+  text-align: left;
+  margin-right: 4px; /* Reduced space between label and input */
+  font-size: 1rem;
+  color: #333;
+}
+
+input {
+  flex-basis: 75%; /* Adjusts input field width */
+  height: 40px; /* Reduced height */
+  padding: 0 10px; /* Reduced padding */
+  font-size: 16px; /* Slightly reduced font size */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+input:focus,
+input:valid {
+  border: 1.5px solid;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.signup-button {
+  width: 175px;
+  margin: 0 auto;
+  color: #003566;
+  background: linear-gradient(to right, #90caf9, #64b5f6);
+  font-size: 1rem; /* Reduced font size */
+  font-weight: 500;
+  letter-spacing: 0.5px; /* Reduced letter spacing */
+  cursor: pointer;
+  border: none;
+  padding: 8px; /* Reduced padding */
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  margin-top: 0.25rem; /* Further reduced margin */
+  margin-bottom: 0.25rem; /* Further reduced margin */
+}
+
+.signup-button:hover {
+  background: linear-gradient(to right, #64b5f6, #42a5f5);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 3px; /* Further reduced margin */
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-bottom: 3px; /* Further reduced margin */
+  font-size: 0.9em; /* Reduced font size */
+}
+
+/* Styling for the Google Sign-In button */
+.google-signin {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.1rem; /* Further reduced margin */
+}
+
+/* Styling for the Facebook Login button */
+.facebook-login {
+  width: 300px;
+  padding: 8px; /* Reduced padding */
+  background: linear-gradient(to right, #90caf9, #64b5f6);
+  color: white;
+  font-size: 1rem; /* Reduced font size */
+  font-weight: 500;
+  letter-spacing: 0.5px; /* Reduced letter spacing */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.facebook-login:hover {
+  background-color: #165dc5;
+}
+
+/* Adding spacing and alignment to both buttons */
+.oauth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* Further reduced gap between the Google and Facebook buttons */
+  width: 100%;
+}

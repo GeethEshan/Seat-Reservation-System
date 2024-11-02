@@ -1,0 +1,13 @@
+.bookingBox-contener {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  background-color: rgba(128, 128, 128, 0.862);
+  margin: 5px;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 1200px;
+  border-radius: 16px;
+  color: white;
+}

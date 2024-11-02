@@ -1,0 +1,59 @@
+/* Report.css */
+
+@media (max-width: 768px) {
+  .report-page {
+    padding: 10px;
+  }
+
+  .header-container {
+    flex-direction: column; /* Stack layout cards and date picker */
+  }
+
+  .table-section {
+    margin-bottom: 20px; /* Space between sections on small screens */
+  }
+}
+
+/* General styles */
+.report-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.data_picker {
+  margin: 20px 0;
+}
+
+
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.card {
+  text-align: center;
+  width: 250px;
+  background: linear-gradient(135deg, rgb(174, 209, 239), rgb(242, 223, 193), rgb(240, 185, 239));
+  color: rgb(51, 51, 51);
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
+  transition: background 0.3s;
+
+}
+
+.card:hover {
+  background-color: #f0f0f0;
+}
+
+.table-section {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

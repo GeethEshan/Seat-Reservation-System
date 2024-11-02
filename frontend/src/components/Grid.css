@@ -1,0 +1,28 @@
+.grid {
+    display: grid; /* Use CSS Grid layout */
+    grid-template-columns: repeat(10, 1fr); /* Adjust this based on the number of seats */
+    grid-gap: 0; /* Remove gaps between grid items */
+    border: 1px solid #000; /* Visible borders for the grid */
+  }
+  
+  .no-grid-lines {
+    border: none; /* Hide the border for the grid */
+  }
+  
+  .seat {
+    width: 40px; /* Set the width for each seat */
+    height: 40px; /* Set the height for each seat */
+    background-color: #e0e0e0; /* Background color for the seats */
+    margin: 2px; /* Optional: margin around each seat */
+    display: flex; /* Center the content inside the seat */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    border: 1px solid transparent; /* No visible borders */
+    border-radius: 4px; /* Optional: rounded corners */
+  }
+  
+  .seat.selected {
+    background-color: #4caf50; /* Color for selected seats */
+    border: 1px solid #388e3c; /* Optional: border for selected seats */
+  }
+  

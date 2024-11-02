@@ -1,0 +1,201 @@
+.seat-selection-container {
+  padding: 20px;
+  text-align: center;
+  margin-left: 40px; /* Increased left margin for the whole page */
+  margin-top: 10px;
+}
+
+.booking-date {
+  margin-left: 330px;
+  font-size: 30px; /* Ensure it matches your design */
+  font-weight: bold; /* Added for emphasis */
+}
+
+.seat-selection-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Added margin for spacing */
+}
+
+.left-side {
+  width: 65%; /* Adjust as needed */
+  padding-right: 20px; /* Added padding for better spacing */
+}
+
+.right-side {
+  width: 35%; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Maximum 10 seats per row */
+  gap: 5px; /* Reduced gap between seat icons */
+  justify-content: center;
+  width: 100%; /* Adjust as needed */
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* Slightly rounded corners */
+  cursor: pointer;
+  border: 2px solid transparent; /* Default to transparent */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Heavy shadow */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s; /* Added transform */
+}
+
+.seat.available {
+  background: radial-gradient(
+    circle,
+    white,
+    #aeeeee,
+    #4caf50
+  ); /* Green gradient towards white */
+  border-color: #4caf50; /* Green outline */
+}
+
+.seat.reserved {
+  background: radial-gradient(
+    circle,
+    white,
+    #ffcdd2,
+    #c62828
+  ); /* Red gradient towards white */
+  border-color: #c62828; /* Red outline */
+}
+
+.seat.temporarily-unavailable {
+  background: radial-gradient(
+    circle,
+    white,
+    #ffe0b2,
+    #ff9800
+  ); /* Orange gradient towards white */
+  border-color: #ff9800; /* Orange outline */
+}
+
+.seat:hover {
+  transform: translateY(-2px); /* Slight upward movement on hover */
+}
+
+.seat.selected {
+  background-color: blue; /* Selected seat color */
+  border-color: darkblue; /* Outline color */
+}
+
+.reserve-button {
+  margin-top: 20px;
+  padding: 10px 20px; /* Increased padding for better touch area */
+  font-size: 16px; /* Adjusted font size */
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%; /* Full width button */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.reserve-button:hover {
+  background-color: darkblue;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 15px; /* Adjusted padding for better appearance */
+  cursor: pointer;
+  width: 120px; /* Adjusted width for pagination buttons */
+  border: 1px solid #ccc; /* Added border for clarity */
+  border-radius: 5px; /* Rounded corners */
+  background-color: white; /* Background color */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0; /* Hover effect */
+}
+
+.legend {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.legend-item .seat {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.legend-item .available {
+  background: radial-gradient(
+    circle,
+    white,
+    #aeeeee,
+    #4caf50
+  ); /* Green legend */
+}
+
+.legend-item .reserved {
+  background: radial-gradient(circle, white, #ffcdd2, #c62828); /* Red legend */
+}
+
+.legend-item .temporarily-unavailable {
+  background: radial-gradient(
+    circle,
+    white,
+    #ffe0b2,
+    #ff9800
+  ); /* Orange legend */
+}
+
+/* Styles for QR code popup */
+.qr-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qr-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.qr-content button {
+  margin-top: 10px;
+}
+
+.legend-item span {
+  font-size: 14px; /* Adjust font size if needed */
+}
