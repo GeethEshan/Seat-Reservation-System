@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'  # Ensures the latest version of Node.js 20 is used
+          node-version: '20'  # Specify Node.js 20 explicitly
 
       - name: Install dependencies and build
         run: |
@@ -35,7 +35,7 @@ jobs:
           path: .  # This assumes your build artifacts are in the root directory
 
   deploy:
-    runs-on: windows-latest  # Changed to Windows to match your environment
+    runs-on: windows-latest  # Keep this as Windows if you want to deploy from a Windows environment
     needs: build
     environment:
       name: 'Production'
