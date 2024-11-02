@@ -20,22 +20,25 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Specify Node.js 20 explicitly
+          node-version: '20'  # Explicitly specifying Node.js version 20
 
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+      - name: Install dependencies
+        run: npm install  # Install dependencies
+
+      - name: Build the application
+        run: npm run build --if-present  # Build the application
+
+      - name: Run tests
+        run: npm run test --if-present  # Run tests if applicable
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: .  # This assumes your build artifacts are in the root directory
+          path: .  # Path where your application files are located
 
   deploy:
-    runs-on: windows-latest  # Keep this as Windows if you want to deploy from a Windows environment
+    runs-on: windows-latest  # Use Windows for deployment
     needs: build
     environment:
       name: 'Production'
