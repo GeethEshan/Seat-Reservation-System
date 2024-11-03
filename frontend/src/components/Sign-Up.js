@@ -19,10 +19,10 @@ const Signup = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -31,7 +31,7 @@ const Signup = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post("http://localhost:8000/api/users/user/add", formData); // Updated to ngrok URL
+      await axios.post("http://localhost:8000/api/users/user/add", formData);
       setSuccessMessage("User registered successfully!");
       navigate("/login");
     } catch (err) {
@@ -49,13 +49,7 @@ const Signup = () => {
 
       localStorage.setItem(
         "user",
-        JSON.stringify({
-          _id,
-          name,
-          nicNo,
-          email,
-          contactNo,
-        })
+        JSON.stringify({ _id, name, nicNo, email, contactNo })
       );
 
       setSuccessMessage("User signed in successfully!");
@@ -72,14 +66,13 @@ const Signup = () => {
     script.onload = () => {
       if (window.google?.accounts) {
         window.google.accounts.id.initialize({
-          client_id:
-            "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com", // Google Client ID
+          client_id: "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com",
           callback: (response) => handleGoogleLoginSuccess(response.credential),
         });
 
         window.google.accounts.id.renderButton(
           document.getElementById("google-signin-button"),
-          { theme: "outline", size: "large" } // Customize button style
+          { theme: "outline", size: "large" }
         );
       } else {
         setError("Google SDK failed to load.");
@@ -94,10 +87,9 @@ const Signup = () => {
   useEffect(() => {
     loadGoogleSDK();
 
-    // Load Facebook SDK
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: "1632017504386559", // Facebook app ID
+        appId: "1632017504386559",
         cookie: true,
         xfbml: true,
         version: "v16.0",
@@ -105,28 +97,22 @@ const Signup = () => {
     };
 
     (function (d, s, id) {
-      const fjs = d.getElementsByTagName(s)[0]; // Use const for fjs since it's not reassigned
-      if (d.getElementById(id)) {
-        return;
-      }
-      const js = d.createElement(s); // Use const for js since it's not reassigned
+      const fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      const js = d.createElement(s);
       js.id = id;
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }, [loadGoogleSDK]); // Add loadGoogleSDK to the dependencies array
+  }, []);
 
   const handleFacebookLogin = () => {
     window.FB.login((response) => {
       if (response.authResponse) {
-        console.log("Facebook login success:", response);
-        // Retrieve user data from Facebook
         window.FB.api("/me", { fields: "name,email" }, async (userInfo) => {
-          console.log("Facebook user info:", userInfo); // Log entire userInfo
-
           try {
             const res = await axios.post(
-              "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/facebook-signin", // Updated to ngrok URL
+              "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/facebook-signin",
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
@@ -136,17 +122,13 @@ const Signup = () => {
 
             localStorage.setItem(
               "user",
-              JSON.stringify({
-                _id,
-                name,
-                email,
-              })
+              JSON.stringify({ _id, name, email })
             );
 
-            // Navigate directly to reserve-seat if user exists
             navigate("/reserve-seat");
           } catch (err) {
             console.error(err);
+            setError("Facebook login failed");
           }
         });
       } else {
@@ -164,9 +146,7 @@ const Signup = () => {
         <div className="signup-container">
           <h2>Sign Up</h2>
           {error && <p className="error-message">{error}</p>}
-          {successMessage && (
-            <p className="success-message">{successMessage}</p>
-          )}
+          {successMessage && <p className="success-message">{successMessage}</p>}
           <form onSubmit={handleSubmit} className="signup-form">
             <div className="form-group">
               <label htmlFor="name">Name:</label>
@@ -179,7 +159,7 @@ const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="nic">NIC:</label>
+              <label htmlFor="nicNo">NIC:</label>
               <input
                 type="text"
                 name="nicNo"
@@ -189,7 +169,7 @@ const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="contact">Contact:</label>
+              <label htmlFor="contactNo">Contact:</label>
               <input
                 type="text"
                 name="contactNo"
