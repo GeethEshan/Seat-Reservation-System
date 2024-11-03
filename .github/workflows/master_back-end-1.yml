@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - Back-End-1
 on:
   push:
     branches:
-      - master  # Change to your default branch name if needed
+      - master
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd backend  # Navigate to the backend folder
+          cd backend  # Change to the backend directory
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: backend  # Adjust this to point to the backend directory
+          path: backend  # Ensure this points to the backend directory
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,8 +46,8 @@ jobs:
 
       - name: List downloaded files
         run: |
-          ls -R # List all files in the workspace to verify they are downloaded correctly
-          # Alternatively, if you want to specifically check the backend folder:
+          ls -R  # List all files to verify they are downloaded correctly
+          # Check specifically in the backend folder
           ls -R backend 
 
       - name: 'Deploy to Azure Web App'
@@ -57,4 +57,4 @@ jobs:
           app-name: 'Back-End-1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_26C091E8DFFD43A288BA0E58A6D55AE5 }}
-          package: 'backend'  # This should be the path to your backend folder relative to the root after artifact download
+          package: './backend'  # Ensure to use the correct path
