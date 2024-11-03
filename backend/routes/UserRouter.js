@@ -209,4 +209,19 @@ router.delete("/user/remove/:id", async (req, res) => {
   }
 });
 
+// Route for user login
+router.get("/user/login", async (req, res) => {
+  const { email, password } = req.query; // Use req.query for GET parameters
+  try {
+    const user = await User.findOne({ email, password }); // You might want to hash and compare passwords in a real app
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ findUser: user });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+
 module.exports = router;
