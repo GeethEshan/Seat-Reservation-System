@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import leftImage from "../images/signup.jpg";
 
+const BASE_URL = "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net";
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +33,7 @@ const Signup = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post("https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/add", formData);
+      await axios.post(`${BASE_URL}/api/users/user/add`, formData);
       setSuccessMessage("User registered successfully!");
       navigate("/login");
     } catch (err) {
@@ -43,7 +45,7 @@ const Signup = () => {
     async (credential) => {
       try {
         const res = await axios.post(
-          "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/google-signin",
+          `${BASE_URL}/api/users/user/google-signin`,
           { idToken: credential }
         );
         const { _id, name, nicNo, email, contactNo } = res.data.user;
@@ -115,7 +117,7 @@ const Signup = () => {
         window.FB.api("/me", { fields: "name,email" }, async (userInfo) => {
           try {
             const res = await axios.post(
-              "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/facebook-signin",
+              `${BASE_URL}/api/users/user/facebook-signin`,
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
