@@ -183,10 +183,7 @@ const Login = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className={styles.loginButton}
-          >
+          <button type="submit" className={styles.loginButton}>
             Login
           </button>
         </form>
@@ -196,10 +193,7 @@ const Login = () => {
         {error && <div className={`${styles.popup} ${styles.error}`}>{error}</div>}
         <div className={styles.oauthButtons}>
           <div id="google-signin-button" className={styles.googleSignin}></div>
-          <button
-            onClick={handleFacebookLogin}
-            className={styles.facebookLogin}
-          >
+          <button onClick={handleFacebookLogin} className={styles.facebookLogin}>
             Continue with Facebook
           </button>
         </div>
