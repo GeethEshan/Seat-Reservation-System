@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Replace with your frontend URL
-    credentials: true, // Enable credentials to support cookies, authorization headers, etc.
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Enable credentials for cookies, auth headers, etc.
   })
 );
 
@@ -38,7 +40,7 @@ const transporter = nodemailer.createTransport({
   },
   secure: true,
   tls: {
-    rejectUnauthorized: false, // Allows unverified TLS connections, generally safe for Gmail
+    rejectUnauthorized: false, // Allows unverified TLS connections; safe for Gmail
   },
 });
 
@@ -59,6 +61,11 @@ app.post("/api/email/send", (req, res) => {
     }
     res.send({ message: "Email sent successfully", info });
   });
+});
+
+// Handle any routes not found
+app.use((req, res) => {
+  res.status(404).send({ error: "Not Found" });
 });
 
 // Start the server
