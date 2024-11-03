@@ -13,7 +13,7 @@ app.disable("x-powered-by"); // Disable "X-Powered-By" header for security
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Replace with your frontend URL
+    origin: "*",  // Replace with your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     credentials: true, // Enable credentials for cookies, auth headers, etc.
