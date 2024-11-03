@@ -6,7 +6,6 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-
 const port = 8000;
 app.disable("x-powered-by");
 
@@ -14,7 +13,7 @@ app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Updated to your frontend URL
     credentials: true,
   })
 );
