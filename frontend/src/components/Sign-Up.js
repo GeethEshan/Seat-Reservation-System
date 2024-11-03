@@ -39,25 +39,28 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = async (credential) => {
-    try {
-      const res = await axios.post(
-        "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/google-signin",
-        { idToken: credential }
-      );
-      const { _id, name, nicNo, email, contactNo } = res.data.user;
+  const handleGoogleLoginSuccess = useCallback(
+    async (credential) => {
+      try {
+        const res = await axios.post(
+          "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/google-signin",
+          { idToken: credential }
+        );
+        const { _id, name, nicNo, email, contactNo } = res.data.user;
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ _id, name, nicNo, email, contactNo })
-      );
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ _id, name, nicNo, email, contactNo })
+        );
 
-      setSuccessMessage("User signed in successfully!");
-      navigate("/reserve-seat");
-    } catch (err) {
-      setError(err.response?.data?.error || "Google Sign-In failed");
-    }
-  };
+        setSuccessMessage("User signed in successfully!");
+        navigate("/reserve-seat");
+      } catch (err) {
+        setError(err.response?.data?.error || "Google Sign-In failed");
+      }
+    },
+    [navigate]
+  );
 
   const loadGoogleSDK = useCallback(() => {
     const script = document.createElement("script");
