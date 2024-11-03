@@ -15,9 +15,9 @@ import SeatSelection from "./components/SeatSelection";
 import Trainees from "./components/Trainees";
 import UserProfileUpdate from "./components/UserProfileUpdate";
 import AdminLp from "./components/AdminLP";
-import SeatLayout from "./components/SeatLayout";  // Import SeatLayout component
-import { DndProvider } from "react-dnd";           // Import react-dnd for drag and drop functionality
-import { HTML5Backend } from "react-dnd-html5-backend";  // Use HTML5Backend for drag-and-drop
+import SeatLayout from "./components/SeatLayout";  
+import { DndProvider } from "react-dnd";          
+import { HTML5Backend } from "react-dnd-html5-backend";  
 import LayoutViewer from "./components/LayoutViewer";
 import DateManager from "./components/DateManager";
 
