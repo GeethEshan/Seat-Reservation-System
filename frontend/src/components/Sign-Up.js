@@ -64,6 +64,7 @@ const Signup = () => {
       setError(err.response?.data?.error || "Google Sign-In failed");
     }
   };
+
   const loadGoogleSDK = () => {
     const script = document.createElement("script");
     script.src = "https://accounts.google.com/gsi/client";
@@ -72,7 +73,7 @@ const Signup = () => {
       if (window.google?.accounts) {
         window.google.accounts.id.initialize({
           client_id:
-            "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com", //  Google Client ID
+            "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com", // Google Client ID
           callback: (response) => handleGoogleLoginSuccess(response.credential),
         });
 
@@ -89,15 +90,14 @@ const Signup = () => {
     };
     document.body.appendChild(script);
   };
-  useEffect(() => {
-    // Load Google SDK
 
+  useEffect(() => {
     loadGoogleSDK();
 
     // Load Facebook SDK
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: "1632017504386559", //Facebook app ID
+        appId: "1632017504386559", // Facebook app ID
         cookie: true,
         xfbml: true,
         version: "v16.0",
@@ -114,7 +114,7 @@ const Signup = () => {
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }, []);
+  }, [loadGoogleSDK]); // Add loadGoogleSDK to the dependencies array
 
   const handleFacebookLogin = () => {
     window.FB.login((response) => {
@@ -146,7 +146,6 @@ const Signup = () => {
             // Navigate directly to reserve-seat if user exists
             navigate("/reserve-seat");
           } catch (err) {
-            
             console.error(err);
           }
         });
