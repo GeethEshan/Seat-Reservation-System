@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
@@ -59,7 +59,7 @@ const Signup = () => {
     }
   };
 
-  const loadGoogleSDK = () => {
+  const loadGoogleSDK = useCallback(() => {
     const script = document.createElement("script");
     script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
@@ -82,7 +82,7 @@ const Signup = () => {
       setError("Google SDK could not be loaded.");
     };
     document.body.appendChild(script);
-  };
+  }, [handleGoogleLoginSuccess]);
 
   useEffect(() => {
     loadGoogleSDK();
@@ -104,7 +104,7 @@ const Signup = () => {
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }, [loadGoogleSDK]); // Added loadGoogleSDK as a dependency here
+  }, [loadGoogleSDK]);
 
   const handleFacebookLogin = () => {
     window.FB.login((response) => {
