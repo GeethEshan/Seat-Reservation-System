@@ -13,9 +13,12 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:8000/api/users/user/get", {
-        params: { email, password },
-      });
+      const response = await axios.get(
+        "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/get", 
+        {
+          params: { email, password },
+        }
+      );
 
       if (response.status === 200) {
         const { _id, name, nicNo, email, contactNo } = response.data.findUser;
@@ -45,9 +48,12 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = useCallback(async (credential) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/users/user/google-signin", {
-        idToken: credential,
-      });
+      const res = await axios.post(
+        "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/google-signin", 
+        {
+          idToken: credential,
+        }
+      );
       const { _id, name, nicNo, email, contactNo } = res.data.user;
 
       localStorage.setItem(
@@ -129,7 +135,7 @@ const Login = () => {
 
           try {
             const res = await axios.post(
-              "http://localhost:8000/api/users/user/facebook-signin",
+              "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/facebook-signin",
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
