@@ -104,7 +104,7 @@ const Signup = () => {
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }, []);
+  }, [loadGoogleSDK]); // Added loadGoogleSDK as a dependency here
 
   const handleFacebookLogin = () => {
     window.FB.login((response) => {
