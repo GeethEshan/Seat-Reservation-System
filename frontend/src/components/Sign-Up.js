@@ -31,7 +31,7 @@ const Signup = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post("http://localhost:8000/api/users/user/add", formData);
+      await axios.post("https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/add", formData);
       setSuccessMessage("User registered successfully!");
       navigate("/login");
     } catch (err) {
@@ -43,7 +43,7 @@ const Signup = () => {
     async (credential) => {
       try {
         const res = await axios.post(
-          "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/google-signin",
+          "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/google-signin",
           { idToken: credential }
         );
         const { _id, name, nicNo, email, contactNo } = res.data.user;
@@ -115,7 +115,7 @@ const Signup = () => {
         window.FB.api("/me", { fields: "name,email" }, async (userInfo) => {
           try {
             const res = await axios.post(
-              "https://d35c-101-2-191-7.ngrok-free.app/api/users/user/facebook-signin",
+              "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/facebook-signin",
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
