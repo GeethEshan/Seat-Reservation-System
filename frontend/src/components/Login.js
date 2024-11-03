@@ -16,6 +16,7 @@ const Login = () => {
       const response = await axios.get("http://localhost:8000/api/users/user/get", {
         params: { email, password },
       });
+
       if (response.status === 200) {
         const { _id, name, nicNo, email, contactNo } = response.data.findUser;
         setSuccess("Login successful");
@@ -117,7 +118,7 @@ const Login = () => {
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
-  }, [loadGoogleSDK]); // Add loadGoogleSDK to the dependencies array
+  }, []);
 
   const handleFacebookLogin = () => {
     window.FB.login((response) => {
@@ -129,7 +130,7 @@ const Login = () => {
 
           try {
             const res = await axios.post(
-              "http://localhost:8000/api/users/user/facebook-signin", // Updated to ngrok URL
+              "http://localhost:8000/api/users/user/facebook-signin",
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
@@ -167,6 +168,7 @@ const Login = () => {
             <label htmlFor="emailInput">Email:</label>
             <input
               type="email"
+              id="emailInput"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -176,6 +178,7 @@ const Login = () => {
             <label htmlFor="passwordInput">Password:</label>
             <input
               type="password"
+              id="passwordInput"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -183,22 +186,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            style={{
-              background: "#0099ff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              padding: "10px 15px",
-              fontSize: "1rem",
-              marginBottom: "5px",
-              cursor: "pointer",
-              transition: "background 0.3s ease",
-              width: "200px",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "#007acc")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "#0099ff")}
-            onFocus={(e) => (e.currentTarget.style.background = "#007acc")}
-            onBlur={(e) => (e.currentTarget.style.background = "#0099ff")}
+            className={styles.loginButton}
           >
             Login
           </button>
@@ -207,12 +195,11 @@ const Login = () => {
           <div className={`${styles.popup} ${styles.success}`}>{success}</div>
         )}
         {error && <div className={`${styles.popup} ${styles.error}`}>{error}</div>}
-        <div className="oauth-buttons">
-          <div id="google-signin-button" className="google-signin"></div>
+        <div className={styles.oauthButtons}>
+          <div id="google-signin-button" className={styles.googleSignin}></div>
           <button
             onClick={handleFacebookLogin}
-            className="facebook-login"
-            style={{ backgroundColor: "white", color: "black" }}
+            className={styles.facebookLogin}
           >
             Continue with Facebook
           </button>
