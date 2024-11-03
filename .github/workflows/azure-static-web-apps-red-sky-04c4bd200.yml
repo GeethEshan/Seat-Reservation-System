@@ -33,8 +33,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_SKY_04C4BD200 }}
           action: "upload"
           app_location: "./frontend" # Ensure this path is correct
-          api_location: "" # Optional
-          output_location: "build" # Ensure this path matches the build output directory
+          api_location: "" # Optional, provide if there is an API folder
+          output_location: "build" # Ensure this matches the output folder generated during build
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
