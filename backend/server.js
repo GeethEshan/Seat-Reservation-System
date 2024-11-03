@@ -13,7 +13,7 @@ app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Updated to your frontend URL
+    origin: "*",  // Updated to your frontend URL
     credentials: true,
   })
 );
