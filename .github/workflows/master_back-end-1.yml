@@ -39,3 +39,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_26C091E8DFFD43A288BA0E58A6D55AE5 }}
           package: './backend'  # Path to the backend directory
+        env:  # Set the environment variables
+          MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
