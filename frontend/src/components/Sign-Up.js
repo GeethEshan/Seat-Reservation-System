@@ -43,7 +43,7 @@ const Signup = () => {
     async (credential) => {
       try {
         const res = await axios.post(
-          "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/api/users/user/google-signin",
+          "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net/users/user/google-signin",
           { idToken: credential }
         );
         const { _id, name, nicNo, email, contactNo } = res.data.user;
