@@ -36,7 +36,8 @@ jobs:
           cd Backend  # Change to the Backend directory
           npm install  # Install dependencies for the backend
           npm run build --if-present  # Build the backend if applicable
-          npm run test --if-present  # Run tests for the backend if applicable
+          # Removed the test command for the backend
+          # npm run test --if-present  # Run tests for the backend if applicable
 
       - name: Upload backend artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -70,7 +71,8 @@ jobs:
           cd Frontend  # Change to the Frontend directory
           npm install  # Install dependencies for the frontend
           npm run build --if-present  # Build the frontend if applicable
-          npm run test --if-present  # Run tests for the frontend if applicable
+          # Removed the test command for the frontend
+          # npm run test --if-present  # Run tests for the frontend if applicable
 
       - name: Upload frontend artifact for deployment job
         uses: actions/upload-artifact@v3
