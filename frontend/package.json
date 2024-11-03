@@ -13,6 +13,7 @@
     "qrcode.react": "^4.0.1",
     "react": "^18.3.1",
     "react-csv": "^2.2.2",
+    "react-datepicker": "^7.3.0",  // Added as a dependency
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.3.1",
@@ -22,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "peerDependencies": {
-    "react-datepicker": "^8.0.0"
+    "react-datepicker": "^7.3.0"  // Defined as a peer dependency
   },
   "scripts": {
     "start": "react-scripts start",
