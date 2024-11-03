@@ -92,7 +92,7 @@ const Login = () => {
       setError("Google SDK could not be loaded.");
     };
     document.body.appendChild(script);
-  }, []); // Empty dependency array to ensure this only loads once
+  }, [handleGoogleLoginSuccess]); // Added handleGoogleLoginSuccess to the dependency array
 
   useEffect(() => {
     loadGoogleSDK();
