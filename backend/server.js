@@ -7,14 +7,14 @@ require("dotenv").config();
 
 const app = express();
 const port = 8000;
-app.disable("x-powered-by");
+app.disable("x-powered-by"); // Disable "X-Powered-By" header for security
 
 // Middleware setup
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Updated to your frontend URL
-    credentials: true,
+    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Replace with your frontend URL
+    credentials: true, // Enable credentials to support cookies, authorization headers, etc.
   })
 );
 
@@ -22,12 +22,12 @@ app.use(
 const UserRouter = require("./routes/UserRouter");
 const BookingRouter = require("./routes/BookingDataRouter");
 const AllSeatRouter = require("./routes/AllSeatRouter");
-const seatLayoutRoutes = require('./routes/seatLayout');
+const seatLayoutRoutes = require("./routes/seatLayout");
 
 app.use("/api/users", UserRouter);
 app.use("/api/seats", AllSeatRouter);
 app.use("/api/bookings", BookingRouter);
-app.use('/api/seat-layout', seatLayoutRoutes);
+app.use("/api/seat-layout", seatLayoutRoutes);
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -38,7 +38,7 @@ const transporter = nodemailer.createTransport({
   },
   secure: true,
   tls: {
-    rejectUnauthorized: false,
+    rejectUnauthorized: false, // Allows unverified TLS connections, generally safe for Gmail
   },
 });
 
