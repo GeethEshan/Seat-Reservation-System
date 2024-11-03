@@ -13,7 +13,7 @@ app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "*",  // Updated to your frontend URL
+    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net",  // Update to your frontend URL
     credentials: true,
   })
 );
@@ -34,7 +34,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // App password from Gmail
+    pass: process.env.EMAIL_PASS,
   },
   secure: true,
   tls: {
