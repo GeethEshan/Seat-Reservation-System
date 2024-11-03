@@ -43,7 +43,7 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = async (credential) => {
+  const handleGoogleLoginSuccess = useCallback(async (credential) => {
     try {
       const res = await axios.post("http://localhost:8000/api/users/user/google-signin", {
         idToken: credential,
@@ -67,7 +67,7 @@ const Login = () => {
     } catch (err) {
       setError(err.response?.data?.error || "Google Sign-In failed");
     }
-  };
+  }, [navigate]);
 
   const loadGoogleSDK = useCallback(() => {
     const script = document.createElement("script");
@@ -92,7 +92,7 @@ const Login = () => {
       setError("Google SDK could not be loaded.");
     };
     document.body.appendChild(script);
-  }, [handleGoogleLoginSuccess]); // Added handleGoogleLoginSuccess to the dependency array
+  }, [handleGoogleLoginSuccess]);
 
   useEffect(() => {
     loadGoogleSDK();
