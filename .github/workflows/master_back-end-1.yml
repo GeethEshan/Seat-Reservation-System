@@ -44,6 +44,12 @@ jobs:
         with:
           name: node-app
 
+      - name: List downloaded files
+        run: |
+          ls -R # List all files in the workspace to verify they are downloaded correctly
+          # Alternatively, if you want to specifically check the backend folder:
+          ls -R backend 
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
@@ -51,4 +57,4 @@ jobs:
           app-name: 'Back-End-1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_26C091E8DFFD43A288BA0E58A6D55AE5 }}
-          package: 'backend'  # Deploying the backend folder
+          package: 'backend'  # This should be the path to your backend folder relative to the root after artifact download
