@@ -26,6 +26,11 @@ jobs:
           cd backend  # Navigate into the backend directory
           npm install
 
+      - name: Build the project
+        run: |
+          cd backend
+          npm run build  # Run the build script if your project has one
+
       - name: List files before deployment
         run: |
           cd backend
