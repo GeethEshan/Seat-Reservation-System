@@ -1,4 +1,12 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -9,20 +17,13 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.3",
     "nodemailer": "^6.9.15",
-    "nodemon": "^3.1.4",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   },
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"No tests specified\" && exit 0",
-    "start": "nodemon server.js",
-    "build": "npm install --legacy-peer-deps && your-build-command"
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
