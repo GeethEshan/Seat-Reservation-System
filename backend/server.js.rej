@@ -3,7 +3,7 @@ diff a/backend/server.js b/backend/server.js	(rejected hunks)
  app.use(bodyParser.json());
  app.use(
    cors({
--    origin: "http://localhost:3000",
+-    origin: "https://delightful-field-01a8dcc00.5.azurestaticapps.net/",
 +    origin: true,
      credentials: true,
    })
