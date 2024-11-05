@@ -224,127 +224,14 @@ const LayoutViewer = () => {
   );
 };
 
-// Styling
 const styles = {
-  container: { textAlign: "center", marginTop: "40px" },
-  subNavBar: { opacity: "10", padding: "10px" },
-  subNavTitle: { margin: "0", opacity: "10" },
-  cardContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    opacity: "10",
-    gap: "10px",
-    marginTop: "10px",
-  },
-  card: {
-    border: "1px solid #ccc",
-    padding: "1px", // Further reduced padding
-    borderRadius: "10px",
-    width: "180px", // Adjust width if needed
-    textAlign: "center",
-    cursor: "pointer",
-    transition: "all 0.3s",
-    height: "50px", // Further reduced height
-  },
-  selectedLayoutContainer: { marginTop: "20px" },
-  seatGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(10, 50px)",
-    gridGap: "10px",
-    justifyContent: "center",
-    marginTop: "10px",
-    marginBottom: "15px",
-  },
-  seatIcon: {
-    width: "50px",
-    height: "50px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "5px",
-    cursor: "pointer",
-    color: "black",
-    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.5)", // Heavy shadow added
-  },
-  emptySeatIcon: {
-    width: "50px",
-    height: "50px",
-    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.5)",
-    borderRadius: "5px",
-    backgroundColor: "#F8F8FF",
-  },
-
-  seatIdText: { fontSize: "12px", color: "#000000" },
-  reserveContainer: { marginTop: "10px" },
-  reserveButton: {
-    padding: "10px 20px",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  errorText: { color: "red", marginTop: "10px" },
-  closeModalButton: {
-    padding: "10px 20px",
-    backgroundColor: "#007bff",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    marginTop: "10px",
-    cursor: "pointer",
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-
-  backButton: {
-    width: "150px",
-    position: "absolute", // Makes it float at a fixed position
-    top: "10px", // Adjust the vertical distance from the top
-    left: "10px", // Adjust the horizontal distance from the left
-    backgroundColor: "#4CAF50",
-    color: "white",
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-};
-const modalStyles = {
-  content: {
-    display: "flex",
-
-    flexDirection: "column",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "20px",
-    borderRadius: "8px",
-    textAlign: "center",
-    boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.2)",
-  },
-  modalTitle: {
-    fontSize: "1.5em",
-    fontWeight: "bold",
-    marginBottom: "10px",
-  },
-  modalContent: {
-    fontSize: "1em",
-    marginBottom: "20px",
-  },
-  modalCloseButton: {
-    padding: "10px",
-    backgroundColor: "#5da92f",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
+  container: { padding: "20px" },
+  backButton: { marginBottom: "20px" },
+  subNavBar: { marginBottom: "20px" },
+  subNavTitle: { fontSize: "1.5em" },
+  cardContainer: { display: "flex", gap: "10px" },
+  card: { padding: "10px", borderRadius: "8px", cursor: "pointer" },
+  modal: { content: { top: "50%", left: "50%", right: "auto", bottom: "auto", marginRight: "-50%", transform: "translate(-50%, -50%)" }},
 };
 
 export default LayoutViewer;
