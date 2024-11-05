@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import leftImage from "../images/signup.jpg";
 
-const BASE_URL = "https://back-end-1-afh8d8byc2dpa2df.eastasia-01.azurewebsites.net";
+// Updated BASE_URL to the deployed backend URL
+const BASE_URL = "https://backend-1-440807.el.r.appspot.com";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const Signup = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post(`http://localhost:8000/api/users/user/add`, formData);
+      await axios.post(`${BASE_URL}/api/users/user/add`, formData);
       setSuccessMessage("User registered successfully!");
       navigate("/login");
     } catch (err) {
