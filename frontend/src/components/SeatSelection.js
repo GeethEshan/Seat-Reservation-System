@@ -26,7 +26,7 @@ const SeatSelection = () => {
     const fetchSeats = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/seats/allSeats/getAll"
+          "https://backend-1-440807.el.r.appspot.com/api/seats/allSeats/getAll"
         );
         const data = await response.json();
         setTotalSeats(data?.seat?.totalSeats || 0);
@@ -38,7 +38,7 @@ const SeatSelection = () => {
     const fetchTemporarilyUnavailableSeats = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/seats/seats/unavailable/${bookingDate}`
+          `https://backend-1-440807.el.r.appspot.com/api/seats/seats/unavailable/${bookingDate}`
         );
         const data = await response.json();
         setTemporarilyUnavailableSeats(data.map((seat) => seat.seatNumber));
@@ -50,7 +50,7 @@ const SeatSelection = () => {
     const fetchBookings = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/bookings/history/${bookingDate}`
+          `https://backend-1-440807.el.r.appspot.com/api/bookings/history/${bookingDate}`
         );
         const data = await response.json();
         setReservedSeats(data.map((booking) => booking.seatNumber));
@@ -68,7 +68,7 @@ const SeatSelection = () => {
     const fetchUserBookings = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/bookings/user-bookings/${userData._id}/date/${bookingDate}`
+          `https://backend-1-440807.el.r.appspot.com/api/bookings/user-bookings/${userData._id}/date/${bookingDate}`
         );
         const data = await response.json();
         setUserReservations(data);
@@ -99,7 +99,7 @@ const SeatSelection = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/bookings/add", {
+      const response = await fetch("https://backend-1-440807.el.r.appspot.com/api/bookings/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const SeatSelection = () => {
 
   const sendEmail = async (userData) => {
     try {
-      await fetch("http://localhost:8000/api/email/send", {
+      await fetch("https://backend-1-440807.el.r.appspot.com/api/email/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
