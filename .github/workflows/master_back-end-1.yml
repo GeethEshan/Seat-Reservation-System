@@ -36,6 +36,11 @@ jobs:
           cd backend
           ls -R  # List all files to verify they are present
 
+      - name: Start Node server in the background
+        run: |
+          cd backend
+          node server.js &  # Start the Node server in the background
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
@@ -48,8 +53,3 @@ jobs:
           MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-
-      - name: Start Node server
-        run: |
-          cd backend
-          node server.js  # Start the Node server
