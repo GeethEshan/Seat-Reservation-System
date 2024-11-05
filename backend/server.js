@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 8000; // Use environment variable for the port
+const port = process.env.PORT || 8000; // Azure will provide the PORT in the environment variable
 app.disable("x-powered-by");
 
 // Middleware setup
