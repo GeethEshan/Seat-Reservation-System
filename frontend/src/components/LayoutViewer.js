@@ -25,7 +25,7 @@ const LayoutViewer = () => {
 
   const fetchLayouts = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/seat-layout");
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       setLayouts(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -36,7 +36,7 @@ const LayoutViewer = () => {
   const fetchReservedSeats = async (bookingDate, layoutName) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/bookings/reserved-seats/${bookingDate}/${layoutName}`
+        `https://backend-1-440807.el.r.appspot.com/api/bookings/reserved-seats/${bookingDate}/${layoutName}`
       );
       setReservedSeats((prevReservedSeats) => ({
         ...prevReservedSeats,
@@ -50,7 +50,7 @@ const LayoutViewer = () => {
   const fetchUnavailableSeats = async (bookingDate, layoutName) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/seat-layout/unavailable-seats/${bookingDate}/${layoutName}`
+        `https://backend-1-440807.el.r.appspot.com/api/seat-layout/unavailable-seats/${bookingDate}/${layoutName}`
       );
       setUnavailableSeats(response.data.map((seat) => seat.seatId) || []);
     } catch (error) {
@@ -134,7 +134,7 @@ const LayoutViewer = () => {
   };
 
   const checkBooking = async (user, bookingDate, layoutName) => {
-    const response = await axios.post("http://localhost:8000/api/bookings/check-reservation", {
+    const response = await axios.post("https://backend-1-440807.el.r.appspot.com/api/bookings/check-reservation", {
       userId: user._id,
       bookingDate: bookingDate || new Date().toISOString().split("T")[0],
       layoutName: layoutName,
@@ -154,7 +154,7 @@ const LayoutViewer = () => {
     }
   
     // If no booking exists, proceed with seat reservation
-    const response = await axios.post("http://localhost:8000/api/bookings/reserve-seat/add", {
+    const response = await axios.post("https://backend-1-440807.el.r.appspot.com/api/bookings/reserve-seat/add", {
       userId: user._id,
       userName: user.name,
       userEmail: user.email,
@@ -216,7 +216,7 @@ const LayoutViewer = () => {
     bookingDate
   ) => {
     try {
-      await axios.post("http://localhost:8000/api/email/send", {
+      await axios.post("https://backend-1-440807.el.r.appspot.com/api/email/send", {
         to: userEmail,
         name: userName,
         nicNo: userNicNo,
