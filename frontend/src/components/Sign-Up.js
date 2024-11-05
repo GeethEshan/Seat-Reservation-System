@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import leftImage from "../images/signup.jpg";
 
-// Updated BASE_URL to the deployed backend URL
-const BASE_URL = "https://backend-1-440807.el.r.appspot.com";
+// Use BASE_URL based on the environment
+const BASE_URL = process.env.NODE_ENV === "development" 
+  ? "http://localhost:8000" // Localhost URL for development
+  : "https://backend-1-440807.el.r.appspot.com"; // Deployed backend URL
 
 const Signup = () => {
   const [formData, setFormData] = useState({
