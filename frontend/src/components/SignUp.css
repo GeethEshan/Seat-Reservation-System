@@ -56,12 +56,12 @@
 .form-group {
   display: flex;
   align-items: center; /* Aligns label and input field horizontally */
-  justify-content: space-between; /* Ensures label and input field are spaced correctly */
+  justify-content: flex-start; /* Aligns label and input field to the start */
   margin-bottom: 0.15rem; /* Further reduced margin */
 }
 
 label {
-  width: 50px; /* Reduce label width */
+  width: 100px; /* Adjust label width for better alignment */
   text-align: left;
   margin-right: 4px; /* Reduced space between label and input */
   font-size: 1rem;
@@ -69,93 +69,65 @@ label {
 }
 
 input {
-  flex-basis: 75%; /* Adjusts input field width */
+  flex: 1; /* Makes the input field take the remaining space */
   height: 40px; /* Reduced height */
-  padding: 0 10px; /* Reduced padding */
-  font-size: 16px; /* Slightly reduced font size */
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 0 8px; /* Adjusted padding for better look */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+}
+
+input:focus {
   outline: none;
-}
-
-input:focus,
-input:valid {
-  border: 1.5px solid;
-}
-
-input:focus ~ label,
-input:valid ~ label {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  border-color: #007bff; /* Focus border color */
 }
 
 .signup-button {
-  width: 175px;
-  margin: 0 auto;
-  color: #003566;
-  background: linear-gradient(to right, #90caf9, #64b5f6);
-  font-size: 1rem; /* Reduced font size */
-  font-weight: 500;
-  letter-spacing: 0.5px; /* Reduced letter spacing */
-  cursor: pointer;
+  height: 40px; /* Consistent button height */
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 8px; /* Reduced padding */
-  border-radius: 5px;
-  transition: background 0.3s ease;
-  margin-top: 0.25rem; /* Further reduced margin */
-  margin-bottom: 0.25rem; /* Further reduced margin */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .signup-button:hover {
-  background: linear-gradient(to right, #64b5f6, #42a5f5);
+  background-color: #0056b3; /* Darker shade for hover effect */
 }
 
 .error-message {
   color: red;
   text-align: center;
-  margin-bottom: 3px; /* Further reduced margin */
+  margin: 0.5rem 0;
 }
 
 .success-message {
   color: green;
   text-align: center;
-  margin-bottom: 3px; /* Further reduced margin */
-  font-size: 0.9em; /* Reduced font size */
+  margin: 0.5rem 0;
 }
 
-/* Styling for the Google Sign-In button */
-.google-signin {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.1rem; /* Further reduced margin */
-}
-
-/* Styling for the Facebook Login button */
-.facebook-login {
-  width: 300px;
-  padding: 8px; /* Reduced padding */
-  background: linear-gradient(to right, #90caf9, #64b5f6);
-  color: white;
-  font-size: 1rem; /* Reduced font size */
-  font-weight: 500;
-  letter-spacing: 0.5px; /* Reduced letter spacing */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  justify-content: center;
-}
-
-.facebook-login:hover {
-  background-color: #165dc5;
-}
-
-/* Adding spacing and alignment to both buttons */
 .oauth-buttons {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem; /* Further reduced gap between the Google and Facebook buttons */
+  align-items: center;
+}
+
+.google-signin {
+  margin-bottom: 10px; /* Space between buttons */
+}
+
+.facebook-login {
   width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.facebook-login:hover {
+  background-color: #d3d3d3; /* Slightly darker on hover */
 }
