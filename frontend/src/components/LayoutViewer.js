@@ -240,10 +240,18 @@ const LayoutViewer = () => {
     };
   };
 
-  const handleModalClose = () => {
+const handleModalClose = async () => {
     setIsModalOpen(false);
-    window.location.reload(); // Refresh the page when modal is closed
-  };
+    // Fetch data again
+    await fetchLayouts(); // Refresh layouts
+    if (bookingDate && selectedLayout) {
+        await fetchReservedSeats(bookingDate, selectedLayout.layoutName); // Refresh reserved seats
+        await fetchUnavailableSeats(bookingDate, selectedLayout.layoutName); // Refresh unavailable seats
+    }
+    // Optionally refresh the page instead of just the data fetch
+    // window.location.reload(); // Refresh the page if you prefer this method
+};
+
 
   return (
     <div style={styles.container}>
