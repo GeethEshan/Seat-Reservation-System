@@ -22,7 +22,7 @@ const MyReservations = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8000/api/bookings/user-bookings/${user._id}`
+          `https://backend-1-440807.el.r.appspot.com/api/bookings/user-bookings/${user._id}`
         );
         const data = await response.json();
 
@@ -63,7 +63,7 @@ const MyReservations = () => {
     if (isFutureDate(bookingDate)) {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/bookings/delete-booking/${id}`,
+          `https://backend-1-440807.el.r.appspot.com/api/bookings/delete-booking/${id}`,
           {
             method: "DELETE",
           }
