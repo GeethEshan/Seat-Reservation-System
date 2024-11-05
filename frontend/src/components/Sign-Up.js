@@ -33,7 +33,7 @@ const Signup = () => {
     setSuccessMessage("");
 
     try {
-      await axios.post(`${BASE_URL}/api/users/user/add`, formData);
+      await axios.post(`http://localhost:8000/api/users/user/add`, formData);
       setSuccessMessage("User registered successfully!");
       navigate("/login");
     } catch (err) {
