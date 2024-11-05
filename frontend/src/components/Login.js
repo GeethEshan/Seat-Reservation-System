@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:8000/api/users/user/get", {
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/users/user/get", {
         params: { email, password },
       });
 
@@ -45,7 +45,7 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = useCallback(async (credential) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/users/user/google-signin", {
+      const res = await axios.post("https://backend-1-440807.el.r.appspot.com/api/users/user/google-signin", {
         idToken: credential,
       });
       const { _id, name, nicNo, email, contactNo } = res.data.user;
@@ -129,7 +129,7 @@ const Login = () => {
 
           try {
             const res = await axios.post(
-              "https://http://localhost:8000/api/users/user/facebook-signin",
+              "https://https://backend-1-440807.el.r.appspot.com/api/users/user/facebook-signin",
               {
                 accessToken: response.authResponse.accessToken,
                 userInfo,
