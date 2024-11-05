@@ -43,7 +43,7 @@ const UserProfileUpdate = () => {
     const userId = storedUser?._id;
 
     try {
-      await axios.put(`http://localhost:8000/api/users/user/update/${userId}`, {
+      await axios.put(`https://backend-1-440807.el.r.appspot.com/api/users/user/update/${userId}`, {
         name: userData.name,
         email: userData.email, // Ensure the email is included in the update
         nicNo: userData.nicNo,
