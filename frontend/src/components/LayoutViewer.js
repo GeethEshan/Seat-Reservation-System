@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
@@ -23,9 +23,25 @@ const LayoutViewer = () => {
   const queryParams = new URLSearchParams(location.search);
   const bookingDate = queryParams.get("date");
 
+  const [canvasRef, setCanvasRef] = useState(null); // State to hold the canvas reference
+
+  const handleDownload = () => {
+    if (canvasRef) {
+      const pngUrl = canvasRef.toDataURL("image/png"); // Convert canvas to image URL
+      const link = document.createElement("a");
+      link.href = pngUrl; // Set the image URL as href
+      link.download = "qr_code.png"; // Set the filename
+      link.click(); // Simulate a click to download the image
+    } else {
+      console.error("Canvas not found"); // Log error if canvas is not found
+    }
+  };
+
   const fetchLayouts = async () => {
     try {
-      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
+      const response = await axios.get(
+        "https://backend-1-440807.el.r.appspot.com/api/seat-layout"
+      );
       setLayouts(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -134,45 +150,57 @@ const LayoutViewer = () => {
   };
 
   const checkBooking = async (user, bookingDate, layoutName) => {
-    const response = await axios.post("https://backend-1-440807.el.r.appspot.com/api/bookings/check-reservation", {
-      userId: user._id,
-      bookingDate: bookingDate || new Date().toISOString().split("T")[0],
-      layoutName: layoutName,
-    });
+    const response = await axios.post(
+      "https://backend-1-440807.el.r.appspot.com/api/bookings/check-reservation",
+      {
+        userId: user._id,
+        bookingDate: bookingDate || new Date().toISOString().split("T")[0],
+        layoutName: layoutName,
+      }
+    );
     return response.data;
   };
-  
+
   const reserveSeat = async (user, bookingDate) => {
-    const bookingDateFormatted = bookingDate || new Date().toISOString().split("T")[0];
-  
+    const bookingDateFormatted =
+      bookingDate || new Date().toISOString().split("T")[0];
+
     // First, check if the user already has a booking for the selected date
-    const checkResponse = await checkBooking(user, bookingDateFormatted, selectedLayout.layoutName);
-    
+    const checkResponse = await checkBooking(
+      user,
+      bookingDateFormatted,
+      selectedLayout.layoutName
+    );
+
     if (checkResponse.exists) {
-      alert(`You have already reserved a seat for this date: ${bookingDateFormatted}.`);
-      return;  // Stop further execution if the user already has a booking
+      alert(
+        `You have already reserved a seat for this date: ${bookingDateFormatted}.`
+      );
+      return; // Stop further execution if the user already has a booking
     }
-  
+
     // If no booking exists, proceed with seat reservation
-    const response = await axios.post("https://backend-1-440807.el.r.appspot.com/api/bookings/reserve-seat/add", {
-      userId: user._id,
-      userName: user.name,
-      userEmail: user.email,
-      userContactNo: user.contactNo,
-      userNicNo: user.nicNo,
-      bookingDate: bookingDateFormatted,
-      seatId: selectedSeat.seatId,
-      layoutName: selectedLayout.layoutName,
-    });
-  
+    const response = await axios.post(
+      "https://backend-1-440807.el.r.appspot.com/api/bookings/reserve-seat/add",
+      {
+        userId: user._id,
+        userName: user.name,
+        userEmail: user.email,
+        userContactNo: user.contactNo,
+        userNicNo: user.nicNo,
+        bookingDate: bookingDateFormatted,
+        seatId: selectedSeat.seatId,
+        layoutName: selectedLayout.layoutName,
+      }
+    );
+
     // Optionally handle errors
     if (!response.data.success) {
       alert("Error occurred while reserving your seat.");
     }
-  
+
     return response.data;
   };
-  
 
   const handleReservationResponse = async (data, user) => {
     if (data.success) {
@@ -204,7 +232,6 @@ const LayoutViewer = () => {
       alert(error.response.data.message); // Display the error message to the user
     } else {
       console.error("An unexpected error occurred:", error);
-      
     }
   };
 
@@ -216,13 +243,16 @@ const LayoutViewer = () => {
     bookingDate
   ) => {
     try {
-      await axios.post("https://backend-1-440807.el.r.appspot.com/api/email/send", {
-        to: userEmail,
-        name: userName,
-        nicNo: userNicNo,
-        seatNumber: seatId,
-        bookingDate: bookingDate || new Date().toISOString().split("T")[0],
-      });
+      await axios.post(
+        "https://backend-1-440807.el.r.appspot.com/api/email/send",
+        {
+          to: userEmail,
+          name: userName,
+          nicNo: userNicNo,
+          seatNumber: seatId,
+          bookingDate: bookingDate || new Date().toISOString().split("T")[0],
+        }
+      );
     } catch (error) {
       console.error("Error sending email:", error);
       alert(
@@ -240,18 +270,17 @@ const LayoutViewer = () => {
     };
   };
 
-const handleModalClose = async () => {
+  const handleModalClose = async () => {
     setIsModalOpen(false);
     // Fetch data again
     await fetchLayouts(); // Refresh layouts
     if (bookingDate && selectedLayout) {
-        await fetchReservedSeats(bookingDate, selectedLayout.layoutName); // Refresh reserved seats
-        await fetchUnavailableSeats(bookingDate, selectedLayout.layoutName); // Refresh unavailable seats
+      await fetchReservedSeats(bookingDate, selectedLayout.layoutName); // Refresh reserved seats
+      await fetchUnavailableSeats(bookingDate, selectedLayout.layoutName); // Refresh unavailable seats
     }
     // Optionally refresh the page instead of just the data fetch
     // window.location.reload(); // Refresh the page if you prefer this method
-};
-
+  };
 
   return (
     <div style={styles.container}>
@@ -287,100 +316,102 @@ const handleModalClose = async () => {
       </div>
 
       {selectedLayout && (
-  <div style={styles.selectedLayoutContainer}>
-    <h3>Selected Layout: {selectedLayout.layoutName}</h3>
-    <h4>Seat IDs:</h4>
-    <div style={styles.seatGrid}>
-      {Array.from({ length: 10 }, (_, rowIndex) => (
-        <React.Fragment key={rowIndex}>
-          {Array.from({ length: 10 }, (_, colIndex) => {
-            const seat = selectedLayout.seatPositions.find(
-              (s) => s.row === rowIndex && s.col === colIndex
-            );
+        <div style={styles.selectedLayoutContainer}>
+          <h3>Selected Layout: {selectedLayout.layoutName}</h3>
+          <h4>Seat IDs:</h4>
+          <div style={styles.seatGrid}>
+            {Array.from({ length: 10 }, (_, rowIndex) => (
+              <React.Fragment key={rowIndex}>
+                {Array.from({ length: 10 }, (_, colIndex) => {
+                  const seat = selectedLayout.seatPositions.find(
+                    (s) => s.row === rowIndex && s.col === colIndex
+                  );
 
-            const isReserved = reservedSeats[
-              selectedLayout.layoutName
-            ]?.includes(seat?.seatId);
-            const isUnavailable = unavailableSeats.includes(seat?.seatId);
-            const isSelected =
-              selectedSeat && selectedSeat.seatId === seat?.seatId;
+                  const isReserved = reservedSeats[
+                    selectedLayout.layoutName
+                  ]?.includes(seat?.seatId);
+                  const isUnavailable = unavailableSeats.includes(seat?.seatId);
+                  const isSelected =
+                    selectedSeat && selectedSeat.seatId === seat?.seatId;
 
-            const getSeatLabel = () => {
-              if (!seat) {
-                return "Empty space"; // Descriptive label for screen readers
-              }
+                  const getSeatLabel = () => {
+                    if (!seat) {
+                      return "Empty space"; // Descriptive label for screen readers
+                    }
 
-              if (isUnavailable) {
-                return `Seat ${seat.seatId} unavailable`;
-              }
+                    if (isUnavailable) {
+                      return `Seat ${seat.seatId} unavailable`;
+                    }
 
-              if (isReserved) {
-                return `Seat ${seat.seatId} reserved`;
-              }
+                    if (isReserved) {
+                      return `Seat ${seat.seatId} reserved`;
+                    }
 
-              return `Seat ${seat.seatId} available`;
-            };
+                    return `Seat ${seat.seatId} available`;
+                  };
 
-            const getBackgroundStyle = () => {
-              if (!seat) return {}; // No background style for empty space
+                  const getBackgroundStyle = () => {
+                    if (!seat) return {}; // No background style for empty space
 
-              let background;
-              if (isUnavailable) {
-                background =
-                  "radial-gradient(circle, rgba(255, 255, 204, 1) 0%, rgba(255, 204, 0, 1) 100%)";
-              } else if (isReserved) {
-                background =
-                  "radial-gradient(circle, rgba(255, 230, 204, 1) 0%, rgba(255, 0, 0, 1) 100%)";
-              } else if (isSelected) {
-                background =
-                  "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(51, 255, 51, 1) 100%)";
-              } else {
-                background =
-                  "radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 1) 100%)";
-              }
+                    let background;
+                    if (isUnavailable) {
+                      background =
+                        "radial-gradient(circle, rgba(255, 255, 204, 1) 0%, rgba(255, 204, 0, 1) 100%)";
+                    } else if (isReserved) {
+                      background =
+                        "radial-gradient(circle, rgba(255, 230, 204, 1) 0%, rgba(255, 0, 0, 1) 100%)";
+                    } else if (isSelected) {
+                      background =
+                        "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(51, 255, 51, 1) 100%)";
+                    } else {
+                      background =
+                        "radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 1) 100%)";
+                    }
 
-              return {
-                ...styles.seatIcon,
-                background,
-                cursor: isReserved || isUnavailable ? "not-allowed" : "pointer",
-              };
-            };
+                    return {
+                      ...styles.seatIcon,
+                      background,
+                      cursor:
+                        isReserved || isUnavailable ? "not-allowed" : "pointer",
+                    };
+                  };
 
-            const seatStyle = getBackgroundStyle();
-            
-            // Render an empty div for empty spaces in the layout
-            return seat ? (
-              <button
-                key={`${rowIndex}-${colIndex}`}
-                aria-label={getSeatLabel()}
-                style={seatStyle}
-                onClick={() => {
-                  if (seat && !isReserved && !isUnavailable) {
-                    handleSelectSeat(seat);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (
-                    (e.key === "Enter" || e.key === " ") &&
-                    seat &&
-                    !isReserved &&
-                    !isUnavailable
-                  ) {
-                    handleSelectSeat(seat);
-                  }
-                }}
-              >
-                {seat.seatId}
-              </button>
-            ) : (
-              <div key={`${rowIndex}-${colIndex}`} style={styles.emptySeatSpace}></div>
-            );
-          })}
-        </React.Fragment>
-      ))}
-    </div>
-  
+                  const seatStyle = getBackgroundStyle();
 
+                  // Render an empty div for empty spaces in the layout
+                  return seat ? (
+                    <button
+                      key={`${rowIndex}-${colIndex}`}
+                      aria-label={getSeatLabel()}
+                      style={seatStyle}
+                      onClick={() => {
+                        if (seat && !isReserved && !isUnavailable) {
+                          handleSelectSeat(seat);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (
+                          (e.key === "Enter" || e.key === " ") &&
+                          seat &&
+                          !isReserved &&
+                          !isUnavailable
+                        ) {
+                          handleSelectSeat(seat);
+                        }
+                      }}
+                    >
+                      {seat.seatId}
+                    </button>
+                  ) : (
+                    <div
+                      key={`${rowIndex}-${colIndex}`}
+                      style={styles.emptySeatSpace}
+                    ></div>
+                  );
+                })}
+              </React.Fragment>
+            ))}
+          </div>
 
           <div style={styles.reserveContainer}>
             <h4>
@@ -398,18 +429,27 @@ const handleModalClose = async () => {
 
       {/* Modal for QR Code */}
       <Modal
-  isOpen={isModalOpen}
-  onRequestClose={handleModalClose}
-  style={modalStyles}
->
-  <h3>Reservation Confirmed!</h3>
-  <h4>Check Your Email For More Info</h4>
-  {qrData && <QRCodeCanvas value={qrData} size={200} />}
-  <button onClick={handleModalClose} style={styles.closeModalButton}>
-    Close
-  </button>
-</Modal>
-
+        isOpen={isModalOpen}
+        onRequestClose={handleModalClose}
+        style={modalStyles}
+      >
+        <h3>Reservation Confirmed!</h3>
+        <h4>Check Your Email For More Info</h4>
+        {qrData && (
+          <QRCodeCanvas
+            value={qrData}
+            size={250}
+            renderAs="canvas" // Ensure QRCode renders as a canvas
+            ref={(canvas) => setCanvasRef(canvas)}
+          />
+        )}
+        <button onClick={handleDownload} style={styles.closeModalButton}>
+          Download QR Code
+        </button>
+        <button onClick={handleModalClose} style={styles.closeModalButton}>
+          Close
+        </button>
+      </Modal>
     </div>
   );
 };
@@ -418,7 +458,7 @@ const handleModalClose = async () => {
 const styles = {
   container: { textAlign: "center", marginTop: "40px" },
   subNavBar: { opacity: "10", padding: "10px" },
-  subNavTitle: { margin: "0",opacity: "10" },
+  subNavTitle: { margin: "0", opacity: "10" },
   cardContainer: {
     display: "flex",
     flexWrap: "wrap",
@@ -504,6 +544,9 @@ const styles = {
 };
 const modalStyles = {
   content: {
+    display: "flex",
+
+    flexDirection: "column",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -532,7 +575,6 @@ const modalStyles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
-  
 };
 
 export default LayoutViewer;
