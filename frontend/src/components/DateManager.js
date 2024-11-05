@@ -37,7 +37,7 @@ const DateManager = () => {
   const fetchHolidays = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/bookings/holiday2"
+        "https://backend-1-440807.el.r.appspot.com/api/bookings/holiday2"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch holidays");
@@ -74,7 +74,7 @@ const DateManager = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/bookings/holiday",
+        "https://backend-1-440807.el.r.appspot.com/api/bookings/holiday",
         {
           method: "POST",
           headers: {
@@ -106,7 +106,7 @@ const DateManager = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/bookings/holiday/${selectedDay.date}`,
+        `https://backend-1-440807.el.r.appspot.com/api/bookings/holiday/${selectedDay.date}`,
         {
           method: "DELETE",
         }

@@ -51,7 +51,7 @@ const SeatLayout = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/seat-layout/saveLayout", {
+      const response = await fetch("https://backend-1-440807.el.r.appspot.com/api/seat-layout/saveLayout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const SeatLayout = () => {
 
   const fetchLayouts = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/seat-layout");
+      const response = await fetch("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       const data = await response.json();
       setLayouts(data);
     } catch (error) {
@@ -95,7 +95,7 @@ const SeatLayout = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/seat-layout/${selectedLayout._id}`, {
+      const response = await fetch(`https://backend-1-440807.el.r.appspot.com/api/seat-layout/${selectedLayout._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const SeatLayout = () => {
   const handleDeleteLayout = async (layoutId) => {
     if (window.confirm("Are you sure you want to delete this layout?")) {
       try {
-        const response = await fetch(`http://localhost:8000/api/seat-layout/${layoutId}`, {
+        const response = await fetch(`https://backend-1-440807.el.r.appspot.com/api/seat-layout/${layoutId}`, {
           method: "DELETE",
         });
 

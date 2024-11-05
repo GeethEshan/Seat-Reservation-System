@@ -18,7 +18,7 @@ const LayoutViewer = () => {
 
   const fetchLayoutsAD = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/seat-layout");
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       setLayoutsAD(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -30,7 +30,7 @@ const LayoutViewer = () => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
       const response = await axios.get(
-        `http://localhost:8000/api/bookings/reserved-seats/${formattedDate}/${layoutName}`
+        `https://backend-1-440807.el.r.appspot.com/api/bookings/reserved-seats/${formattedDate}/${layoutName}`
       );
       const reserved = response.data.map((booking) => booking.seatId) || [];
       setReservedSeatsAD(reserved);
@@ -49,7 +49,7 @@ const LayoutViewer = () => {
     try {
       const formattedDate = date.toISOString().split("T")[0];
       const response = await axios.get(
-        `http://localhost:8000/api/seat-layout/unavailable-seats/${formattedDate}/${layoutName}`
+        `https://backend-1-440807.el.r.appspot.com/api/seat-layout/unavailable-seats/${formattedDate}/${layoutName}`
       );
       const unavailable = response.data.map((seat) => seat.seatId) || [];
       setUnavailableSeatsAD(unavailable);
@@ -110,7 +110,7 @@ const LayoutViewer = () => {
     try {
       const formattedDate = bookingDateAD.toISOString().split("T")[0];
       const promises = selectedSeatsAD.map((seatId) =>
-        axios.post("http://localhost:8000/api/seat-layout/unavailable-seats", {
+        axios.post("https://backend-1-440807.el.r.appspot.com/api/seat-layout/unavailable-seats", {
           date: formattedDate,
           seatId,
           layoutName: selectedLayoutAD.layoutName,

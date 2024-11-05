@@ -10,7 +10,7 @@ const LayoutViewer = ({ onSelectLayout, onNavigate }) => {
 
   const fetchLayouts = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/seat-layout");
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       setLayouts(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -86,7 +86,7 @@ const ReserveHistory = () => {
       if (layoutName) {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/bookings/history/${date}/${layoutName}`
+            `https://backend-1-440807.el.r.appspot.com/api/bookings/history/${date}/${layoutName}`
           );
           setHistoryData(response.data || []);
         } catch (error) {
@@ -105,7 +105,7 @@ const ReserveHistory = () => {
   const handleCheckboxChange = async (id, attended) => {
     try {
       await axios.patch(
-        `http://localhost:8000/api/bookings/update-attendance/${id}`,
+        `https://backend-1-440807.el.r.appspot.com/api/bookings/update-attendance/${id}`,
         { attended }
       );
       setHistoryData((prevData) =>

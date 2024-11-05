@@ -15,7 +15,7 @@ const LayoutViewer = ({ onSelectLayout, selectedLayout }) => {
 
   const fetchLayouts = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/seat-layout");
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       setLayouts(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -87,7 +87,7 @@ const Report = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/bookings/bookings/all"
+        "https://backend-1-440807.el.r.appspot.com/api/bookings/bookings/all"
       );
       const bookings = await response.json();
       setAllBooking(bookings);

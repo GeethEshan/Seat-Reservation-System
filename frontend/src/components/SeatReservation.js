@@ -38,7 +38,7 @@ const SeatReservation = () => {
   // Fetch available seats for the selected date
   const fetchAvailableSeats = async (date) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/seat-layout/available-seats?date=${date}`);
+      const response = await fetch(`https://backend-1-440807.el.r.appspot.com/api/seat-layout/available-seats?date=${date}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -53,7 +53,7 @@ const SeatReservation = () => {
   // Fetch holidays from the database
   const fetchHolidays = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/bookings/holiday2");
+      const response = await fetch("https://backend-1-440807.el.r.appspot.com/api/bookings/holiday2");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
