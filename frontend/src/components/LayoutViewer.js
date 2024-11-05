@@ -17,31 +17,16 @@ const LayoutViewer = () => {
   const [reservedSeats, setReservedSeats] = useState({});
   const [unavailableSeats, setUnavailableSeats] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [canvasRef, setCanvasRef] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const bookingDate = queryParams.get("date");
+  const bookingDate = new URLSearchParams(location.search).get("date");
 
-  const [canvasRef, setCanvasRef] = useState(null); // State to hold the canvas reference
-
-  const handleDownload = () => {
-    if (canvasRef) {
-      const pngUrl = canvasRef.toDataURL("image/png"); // Convert canvas to image URL
-      const link = document.createElement("a");
-      link.href = pngUrl; // Set the image URL as href
-      link.download = "qr_code.png"; // Set the filename
-      link.click(); // Simulate a click to download the image
-    } else {
-      console.error("Canvas not found"); // Log error if canvas is not found
-    }
-  };
-
+  // Fetch layouts from API
   const fetchLayouts = async () => {
     try {
-      const response = await axios.get(
-        "https://backend-1-440807.el.r.appspot.com/api/seat-layout"
-      );
+      const response = await axios.get("https://backend-1-440807.el.r.appspot.com/api/seat-layout");
       setLayouts(response.data);
     } catch (error) {
       console.error("Error fetching layouts:", error);
@@ -49,28 +34,20 @@ const LayoutViewer = () => {
     }
   };
 
-  const fetchReservedSeats = async (bookingDate, layoutName) => {
+  // Fetch reserved and unavailable seats from API
+  const fetchSeats = async (layoutName) => {
     try {
-      const response = await axios.get(
-        `https://backend-1-440807.el.r.appspot.com/api/bookings/reserved-seats/${bookingDate}/${layoutName}`
-      );
-      setReservedSeats((prevReservedSeats) => ({
-        ...prevReservedSeats,
-        [layoutName]: response.data.map((booking) => booking.seatId) || [],
-      }));
+      const [reservedResponse, unavailableResponse] = await Promise.all([
+        axios.get(`https://backend-1-440807.el.r.appspot.com/api/bookings/reserved-seats/${bookingDate}/${layoutName}`),
+        axios.get(`https://backend-1-440807.el.r.appspot.com/api/seat-layout/unavailable-seats/${bookingDate}/${layoutName}`)
+      ]);
+      setReservedSeats({
+        ...reservedSeats,
+        [layoutName]: reservedResponse.data.map((booking) => booking.seatId) || [],
+      });
+      setUnavailableSeats(unavailableResponse.data.map((seat) => seat.seatId) || []);
     } catch (error) {
-      console.error("Error fetching reserved seats:", error);
-    }
-  };
-
-  const fetchUnavailableSeats = async (bookingDate, layoutName) => {
-    try {
-      const response = await axios.get(
-        `https://backend-1-440807.el.r.appspot.com/api/seat-layout/unavailable-seats/${bookingDate}/${layoutName}`
-      );
-      setUnavailableSeats(response.data.map((seat) => seat.seatId) || []);
-    } catch (error) {
-      console.error("Error fetching unavailable seats:", error);
+      console.error("Error fetching seats:", error);
     }
   };
 
@@ -80,11 +57,11 @@ const LayoutViewer = () => {
 
   useEffect(() => {
     if (bookingDate && selectedLayout) {
-      fetchReservedSeats(bookingDate, selectedLayout.layoutName);
-      fetchUnavailableSeats(bookingDate, selectedLayout.layoutName);
+      fetchSeats(selectedLayout.layoutName);
     }
   }, [bookingDate, selectedLayout]);
 
+  // Layout and seat selection handlers
   const handleSelectLayout = (layout) => {
     setSelectedLayout(layout);
     setSelectedSeat(null);
@@ -93,93 +70,59 @@ const LayoutViewer = () => {
   };
 
   const handleSelectSeat = (seat) => {
-    const isReserved = reservedSeats[selectedLayout.layoutName]?.includes(
-      seat.seatId
-    );
+    const isReserved = reservedSeats[selectedLayout.layoutName]?.includes(seat.seatId);
     const isUnavailable = unavailableSeats.includes(seat.seatId);
 
     if (isReserved || isUnavailable) {
-      alert(
-        "This seat is already reserved or unavailable and cannot be selected."
-      );
+      alert("This seat is reserved or unavailable.");
       return;
     }
-
-    if (selectedSeat && selectedSeat.seatId === seat.seatId) {
-      setSelectedSeat(null);
-    } else {
-      setSelectedSeat(seat);
-    }
+    setSelectedSeat(seat.seatId === selectedSeat?.seatId ? null : seat);
   };
 
+  // Handle seat reservation
   const handleReserveSeat = async () => {
-    if (!selectedSeat) {
-      return setReservationStatus("Please select a seat to reserve.");
-    }
+    if (!selectedSeat) return setReservationStatus("Please select a seat to reserve.");
 
     const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-      return setReservationStatus("User not logged in. Please log in.");
-    }
+    if (!user) return setReservationStatus("User not logged in. Please log in.");
 
-    const missingDetails = validateUserDetails(user);
+    const missingDetails = ["_id", "name", "email", "contactNo", "nicNo"].filter((field) => !user[field]);
     if (missingDetails.length > 0) {
-      return setReservationStatus(
-        `Please provide the following user details: ${missingDetails.join(
-          ", "
-        )}`
-      );
+      return setReservationStatus(`Provide user details: ${missingDetails.join(", ")}`);
     }
 
     try {
-      const response = await reserveSeat(user, bookingDate);
-      await handleReservationResponse(response, user);
+      const bookingDateFormatted = bookingDate || new Date().toISOString().split("T")[0];
+      const response = await checkBooking(user, bookingDateFormatted);
+
+      if (response.exists) {
+        alert(`Seat already reserved for date: ${bookingDateFormatted}.`);
+        return;
+      }
+
+      await reserveSeat(user, bookingDateFormatted);
     } catch (error) {
-      handleError(error);
+      console.error("Error reserving seat:", error);
+      alert("Failed to reserve seat. Please try again.");
     }
   };
 
-  const validateUserDetails = (user) => {
-    const missingDetails = [];
-    if (!user._id) missingDetails.push("User ID");
-    if (!user.name) missingDetails.push("User Name");
-    if (!user.email) missingDetails.push("User Email");
-    if (!user.contactNo) missingDetails.push("User Contact No");
-    if (!user.nicNo) missingDetails.push("User NIC No");
-    return missingDetails;
-  };
-
-  const checkBooking = async (user, bookingDate, layoutName) => {
+  // API call to check for existing booking
+  const checkBooking = async (user, bookingDateFormatted) => {
     const response = await axios.post(
       "https://backend-1-440807.el.r.appspot.com/api/bookings/check-reservation",
       {
         userId: user._id,
-        bookingDate: bookingDate || new Date().toISOString().split("T")[0],
-        layoutName: layoutName,
+        bookingDate: bookingDateFormatted,
+        layoutName: selectedLayout.layoutName,
       }
     );
     return response.data;
   };
 
-  const reserveSeat = async (user, bookingDate) => {
-    const bookingDateFormatted =
-      bookingDate || new Date().toISOString().split("T")[0];
-
-    // First, check if the user already has a booking for the selected date
-    const checkResponse = await checkBooking(
-      user,
-      bookingDateFormatted,
-      selectedLayout.layoutName
-    );
-
-    if (checkResponse.exists) {
-      alert(
-        `You have already reserved a seat for this date: ${bookingDateFormatted}.`
-      );
-      return; // Stop further execution if the user already has a booking
-    }
-
-    // If no booking exists, proceed with seat reservation
+  // API call to reserve seat
+  const reserveSeat = async (user, bookingDateFormatted) => {
     const response = await axios.post(
       "https://backend-1-440807.el.r.appspot.com/api/bookings/reserve-seat/add",
       {
@@ -193,106 +136,69 @@ const LayoutViewer = () => {
         layoutName: selectedLayout.layoutName,
       }
     );
-
-    // Optionally handle errors
-    if (!response.data.success) {
-      alert("Error occurred while reserving your seat.");
-    }
-
-    return response.data;
+    handleReservationResponse(response.data, user);
   };
 
+  // Process successful reservation
   const handleReservationResponse = async (data, user) => {
     if (data.success) {
-      const qrCodeData = {
+      setQrData(JSON.stringify({
         seatId: selectedSeat.seatId,
         userName: user.name,
         userEmail: user.email,
         bookingDate: bookingDate || new Date().toISOString().split("T")[0],
-      };
-      setQrData(JSON.stringify(qrCodeData));
-      await sendConfirmationEmail(
-        user.email,
-        selectedSeat.seatId,
-        user.name,
-        user.nicNo,
-        bookingDate
-      );
-      setIsModalOpen(true); // Open modal when reservation is successful
+      }));
+      await sendConfirmationEmail(user);
+      setIsModalOpen(true);
       setReservationStatus("");
     } else {
-      setReservationStatus(data.error || "Failed to reserve seat.");
+      setReservationStatus("Failed to reserve seat.");
     }
   };
 
-  const handleError = (error) => {
-    console.error("Error reserving seat:", error);
-    if (error.response?.data?.message) {
-      console.error("Error message:", error.response.data.message);
-      alert(error.response.data.message); // Display the error message to the user
-    } else {
-      console.error("An unexpected error occurred:", error);
-    }
-  };
-
-  const sendConfirmationEmail = async (
-    userEmail,
-    seatId,
-    userName,
-    userNicNo,
-    bookingDate
-  ) => {
+  // Send confirmation email
+  const sendConfirmationEmail = async (user) => {
     try {
-      await axios.post(
-        "https://backend-1-440807.el.r.appspot.com/api/email/send",
-        {
-          to: userEmail,
-          name: userName,
-          nicNo: userNicNo,
-          seatNumber: seatId,
-          bookingDate: bookingDate || new Date().toISOString().split("T")[0],
-        }
-      );
+      await axios.post("https://backend-1-440807.el.r.appspot.com/api/email/send", {
+        to: user.email,
+        name: user.name,
+        nicNo: user.nicNo,
+        seatNumber: selectedSeat.seatId,
+        bookingDate: bookingDate || new Date().toISOString().split("T")[0],
+      });
     } catch (error) {
       console.error("Error sending email:", error);
-      alert(
-        "Error sending confirmation email. Please check your email settings."
-      );
     }
   };
 
-  const getLayoutCardStyle = (layout) => {
-    return {
-      background:
-        selectedLayout?.layoutName === layout.layoutName
-          ? "linear-gradient(135deg, #5da92f, #9bd46a)" // Selected layout
-          : "linear-gradient(135deg, #aed1ef, #f2dfc1, #f0b9ef)", // Default layout
-    };
-  };
-
-  const handleModalClose = async () => {
+  // Close modal and refresh data
+  const handleModalClose = () => {
     setIsModalOpen(false);
-    // Fetch data again
-    await fetchLayouts(); // Refresh layouts
+    fetchLayouts();
     if (bookingDate && selectedLayout) {
-      await fetchReservedSeats(bookingDate, selectedLayout.layoutName); // Refresh reserved seats
-      await fetchUnavailableSeats(bookingDate, selectedLayout.layoutName); // Refresh unavailable seats
+      fetchSeats(selectedLayout.layoutName);
     }
-    // Optionally refresh the page instead of just the data fetch
-    // window.location.reload(); // Refresh the page if you prefer this method
+  };
+
+  // QR Code download
+  const handleDownload = () => {
+    if (canvasRef) {
+      const pngUrl = canvasRef.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = pngUrl;
+      link.download = "qr_code.png";
+      link.click();
+    } else {
+      console.error("Canvas not found");
+    }
   };
 
   return (
     <div style={styles.container}>
       {/* Back Button */}
-      <button
-        style={styles.backButton}
-        onClick={() => navigate("/reserve-seat")}
-      >
-        Go Back
-      </button>
+      <button style={styles.backButton} onClick={() => navigate("/reserve-seat")}>Go Back</button>
 
-      {/* Sub Navigation for Layouts */}
+      {/* Layout selection */}
       <div style={styles.subNavBar}>
         <h3 style={styles.subNavTitle}>Available Layouts</h3>
         <div style={styles.cardContainer}>
@@ -300,14 +206,8 @@ const LayoutViewer = () => {
             <button
               key={layout._id}
               className="card"
-              aria-label={`Select layout ${layout.layoutName}`} // Provides a meaningful description for screen readers
               onClick={() => handleSelectLayout(layout)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleSelectLayout(layout); // Allows selecting layout with Enter or Space key
-                }
-              }}
-              style={{ ...styles.card, ...getLayoutCardStyle(layout) }} // Applying dynamic styles
+              style={{ ...styles.card, background: selectedLayout?.layoutName === layout.layoutName ? "linear-gradient(135deg, #5da92f, #9bd46a)" : "linear-gradient(135deg, #aed1ef, #f2dfc1, #f0b9ef)" }}
             >
               <h4>{layout.layoutName}</h4>
             </button>
@@ -315,140 +215,10 @@ const LayoutViewer = () => {
         </div>
       </div>
 
-      {selectedLayout && (
-        <div style={styles.selectedLayoutContainer}>
-          <h3>Selected Layout: {selectedLayout.layoutName}</h3>
-          <h4>Seat IDs:</h4>
-          <div style={styles.seatGrid}>
-            {Array.from({ length: 10 }, (_, rowIndex) => (
-              <React.Fragment key={rowIndex}>
-                {Array.from({ length: 10 }, (_, colIndex) => {
-                  const seat = selectedLayout.seatPositions.find(
-                    (s) => s.row === rowIndex && s.col === colIndex
-                  );
-
-                  const isReserved = reservedSeats[
-                    selectedLayout.layoutName
-                  ]?.includes(seat?.seatId);
-                  const isUnavailable = unavailableSeats.includes(seat?.seatId);
-                  const isSelected =
-                    selectedSeat && selectedSeat.seatId === seat?.seatId;
-
-                  const getSeatLabel = () => {
-                    if (!seat) {
-                      return "Empty space"; // Descriptive label for screen readers
-                    }
-
-                    if (isUnavailable) {
-                      return `Seat ${seat.seatId} unavailable`;
-                    }
-
-                    if (isReserved) {
-                      return `Seat ${seat.seatId} reserved`;
-                    }
-
-                    return `Seat ${seat.seatId} available`;
-                  };
-
-                  const getBackgroundStyle = () => {
-                    if (!seat) return {}; // No background style for empty space
-
-                    let background;
-                    if (isUnavailable) {
-                      background =
-                        "radial-gradient(circle, rgba(255, 255, 204, 1) 0%, rgba(255, 204, 0, 1) 100%)";
-                    } else if (isReserved) {
-                      background =
-                        "radial-gradient(circle, rgba(255, 230, 204, 1) 0%, rgba(255, 0, 0, 1) 100%)";
-                    } else if (isSelected) {
-                      background =
-                        "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(51, 255, 51, 1) 100%)";
-                    } else {
-                      background =
-                        "radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(173, 216, 230, 1) 100%)";
-                    }
-
-                    return {
-                      ...styles.seatIcon,
-                      background,
-                      cursor:
-                        isReserved || isUnavailable ? "not-allowed" : "pointer",
-                    };
-                  };
-
-                  const seatStyle = getBackgroundStyle();
-
-                  // Render an empty div for empty spaces in the layout
-                  return seat ? (
-                    <button
-                      key={`${rowIndex}-${colIndex}`}
-                      aria-label={getSeatLabel()}
-                      style={seatStyle}
-                      onClick={() => {
-                        if (seat && !isReserved && !isUnavailable) {
-                          handleSelectSeat(seat);
-                        }
-                      }}
-                      onKeyDown={(e) => {
-                        if (
-                          (e.key === "Enter" || e.key === " ") &&
-                          seat &&
-                          !isReserved &&
-                          !isUnavailable
-                        ) {
-                          handleSelectSeat(seat);
-                        }
-                      }}
-                    >
-                      {seat.seatId}
-                    </button>
-                  ) : (
-                    <div
-                      key={`${rowIndex}-${colIndex}`}
-                      style={styles.emptySeatSpace}
-                    ></div>
-                  );
-                })}
-              </React.Fragment>
-            ))}
-          </div>
-
-          <div style={styles.reserveContainer}>
-            <h4>
-              Selected Seat: {selectedSeat ? selectedSeat.seatId : "None"}
-            </h4>
-            <button style={styles.reserveButton} onClick={handleReserveSeat}>
-              Reserve Seat
-            </button>
-            {reservationStatus && (
-              <p style={{ color: "red" }}>{reservationStatus}</p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Modal for QR Code */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={handleModalClose}
-        style={modalStyles}
-      >
-        <h3>Reservation Confirmed!</h3>
-        <h4>Check Your Email For More Info</h4>
-        {qrData && (
-          <QRCodeCanvas
-            value={qrData}
-            size={250}
-            renderAs="canvas" // Ensure QRCode renders as a canvas
-            ref={(canvas) => setCanvasRef(canvas)}
-          />
-        )}
-        <button onClick={handleDownload} style={styles.closeModalButton}>
-          Download QR Code
-        </button>
-        <button onClick={handleModalClose} style={styles.closeModalButton}>
-          Close
-        </button>
+      {/* Modal for QR code */}
+      <Modal isOpen={isModalOpen} onRequestClose={handleModalClose} style={styles.modal}>
+        <QRCodeCanvas value={qrData || ""} size={250} ref={(canvas) => setCanvasRef(canvas)} />
+        <button onClick={handleDownload}>Download QR Code</button>
       </Modal>
     </div>
   );
