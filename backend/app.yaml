@@ -1,0 +1,9 @@
+runtime: nodejs20  
+handlers:
+  - url: /.*
+    script: auto
+
+env_variables:
+  MONGO_DB_URL: "mongodb+srv://mongoDB:mongoDB@seat-reservation-system.2q81p.mongodb.net/?retryWrites=true&w=majority&appName=seat-reservation-system"
+  EMAIL_USER: "trainee.seat.reservation@gmail.com"
+  EMAIL_PASS: "trvn wptu oeoz gush" 

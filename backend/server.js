@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
+const path = require("path"); // Import path module
 require("dotenv").config();
 
 const app = express();
@@ -17,6 +18,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'frontend', 'build'))); // Adjust this path based on where your build directory is
 
 // Import and use routers
 const UserRouter = require("./routes/UserRouter");
@@ -59,6 +63,12 @@ app.post("/api/email/send", (req, res) => {
     }
     res.send({ message: "Email sent successfully", info });
   });
+});
+
+// The "catchall" handler: for any request that doesn't match one above,
+// send back index.html.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html')); // Ensure the path is correct for your setup
 });
 
 // Start the server
