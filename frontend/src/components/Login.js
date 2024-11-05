@@ -183,7 +183,18 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className={styles.loginButton}>
+          <button
+            type="submit"
+            className={styles.loginButton}
+            style={{
+              backgroundColor: "#4CAF50",
+              color: "white",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
             Login
           </button>
         </form>
@@ -193,7 +204,19 @@ const Login = () => {
         {error && <div className={`${styles.popup} ${styles.error}`}>{error}</div>}
         <div className={styles.oauthButtons}>
           <div id="google-signin-button" className={styles.googleSignin}></div>
-          <button onClick={handleFacebookLogin} className={styles.facebookLogin}>
+          <button
+            onClick={handleFacebookLogin}
+            className={styles.facebookLogin}
+            style={{
+              backgroundColor: "#3b5998",
+              color: "white",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              marginTop: "10px",
+            }}
+          >
             Continue with Facebook
           </button>
         </div>
