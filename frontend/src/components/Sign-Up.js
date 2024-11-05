@@ -229,14 +229,14 @@ const Signup = () => {
               onClick={handleFacebookLogin}
               className="facebook-login"
               style={{
-                backgroundColor: "white",
-                color: "black",
-                height: "40px",
-                borderRadius: "4px",
-                border: "1px solid #ccc",
-                cursor: "pointer",
-                width: "100%",
-                marginTop: "10px", // Added margin for spacing
+              backgroundColor: "#3b5998",
+              color: "white",
+              height: "40px",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              marginTop: "10px",
               }}
             >
               Continue with Facebook
