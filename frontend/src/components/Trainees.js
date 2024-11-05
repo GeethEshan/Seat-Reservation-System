@@ -20,7 +20,7 @@ const Trainees = () => {
   const fetchTrainees = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/users/user/get-all"
+        "https://backend-1-440807.el.r.appspot.com/api/users/user/get-all"
       );
       setTrainees(response.data);
     } catch (error) {
@@ -32,7 +32,7 @@ const Trainees = () => {
   const handleUpdate = async (id, updatedData) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/users/user/update/${id}`,
+        `https://backend-1-440807.el.r.appspot.com/api/users/user/update/${id}`,
         updatedData
       );
       updateTraineeInState(id, response.data.updatedUser);
@@ -52,7 +52,7 @@ const Trainees = () => {
   // Remove trainee
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/users/user/remove/${id}`);
+      await axios.delete(`https://backend-1-440807.el.r.appspot.com/api/users/user/remove/${id}`);
       alert("User moved to past trainees and removed");
       setTrainees((prev) => prev.filter((t) => t._id !== id));
     } catch (error) {
