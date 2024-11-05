@@ -48,3 +48,8 @@ jobs:
           MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
+      - name: Start Node server
+        run: |
+          cd backend
+          node server.js  # Start the Node server
