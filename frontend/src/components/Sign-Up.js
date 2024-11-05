@@ -5,9 +5,10 @@ import "./SignUp.css";
 import leftImage from "../images/signup.jpg";
 
 // Use BASE_URL based on the environment
-const BASE_URL = process.env.NODE_ENV === "development" 
-  ? "http://localhost:8000" // Localhost URL for development
-  : "https://backend-1-440807.el.r.appspot.com"; // Deployed backend URL
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8000" // Localhost URL for development
+    : "https://backend-1-440807.el.r.appspot.com"; // Deployed backend URL
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -74,7 +75,8 @@ const Signup = () => {
     script.onload = () => {
       if (window.google?.accounts) {
         window.google.accounts.id.initialize({
-          client_id: "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com",
+          client_id:
+            "898926845547-r7h9jlmgom538bnjuh2kigivmuh90qpk.apps.googleusercontent.com",
           callback: (response) => handleGoogleLoginSuccess(response.credential),
         });
 
@@ -206,7 +208,18 @@ const Signup = () => {
                 required
               />
             </div>
-            <button type="submit" className="signup-button">
+            <button
+              type="submit"
+              className="signup-button"
+              style={{
+                height: "40px",
+                backgroundColor: "#007bff",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
               Sign Up
             </button>
           </form>
@@ -215,7 +228,16 @@ const Signup = () => {
             <button
               onClick={handleFacebookLogin}
               className="facebook-login"
-              style={{ backgroundColor: "white", color: "black" }}
+              style={{
+                backgroundColor: "white",
+                color: "black",
+                height: "40px",
+                borderRadius: "4px",
+                border: "1px solid #ccc",
+                cursor: "pointer",
+                width: "100%",
+                marginTop: "10px", // Added margin for spacing
+              }}
             >
               Continue with Facebook
             </button>
