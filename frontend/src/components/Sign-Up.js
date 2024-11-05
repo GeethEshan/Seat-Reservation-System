@@ -218,6 +218,7 @@ const Signup = () => {
               padding: "10px 20px",
               border: "none",
               borderRadius: "5px",
+              marginBottom: "5px",
               cursor: "pointer",
               }}
             >
@@ -237,7 +238,7 @@ const Signup = () => {
               border: "none",
               borderRadius: "5px",
               cursor: "pointer",
-              marginTop: "10px",
+              marginTop: "5px",
               }}
             >
               Continue with Facebook
