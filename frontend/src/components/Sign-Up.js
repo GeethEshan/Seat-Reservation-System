@@ -212,12 +212,13 @@ const Signup = () => {
               type="submit"
               className="signup-button"
               style={{
-                height: "40px",
-                backgroundColor: "#007bff",
-                color: "white",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
+              backgroundColor: "#4CAF50",
+              color: "white",
+              height: "40px",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
               }}
             >
               Sign Up
