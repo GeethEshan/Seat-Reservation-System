@@ -294,7 +294,7 @@ const LayoutViewer = () => {
 
       {/* Sub Navigation for Layouts */}
       <div style={styles.subNavBar}>
-        <h3 style={styles.subNavTitle}>Available Layouts</h3>
+       <h3 style={{ ...styles.subNavTitle, color: 'white' }}>Available Layouts</h3>
         <div style={styles.cardContainer}>
           {layouts.map((layout) => (
             <button
@@ -317,8 +317,8 @@ const LayoutViewer = () => {
 
       {selectedLayout && (
         <div style={styles.selectedLayoutContainer}>
-          <h3>Selected Layout: {selectedLayout.layoutName}</h3>
-          <h4>Seat IDs:</h4>
+          <h3 style={{ color: 'white' }}>Selected Layout: {selectedLayout.layoutName}</h3>
+          <h4 style={{ color: 'white' }}>Seat IDs:</h4>
           <div style={styles.seatGrid}>
             {Array.from({ length: 10 }, (_, rowIndex) => (
               <React.Fragment key={rowIndex}>
@@ -414,9 +414,9 @@ const LayoutViewer = () => {
           </div>
 
           <div style={styles.reserveContainer}>
-            <h4>
-              Selected Seat: {selectedSeat ? selectedSeat.seatId : "None"}
-            </h4>
+            <h4 style={{ color: 'white' }}>
+  Selected Seat: {selectedSeat ? selectedSeat.seatId : "None"}
+</h4>
             <button style={styles.reserveButton} onClick={handleReserveSeat}>
               Reserve Seat
             </button>
