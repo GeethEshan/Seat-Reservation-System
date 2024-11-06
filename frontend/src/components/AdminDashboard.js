@@ -224,7 +224,7 @@ const LayoutViewer = () => {
                       } else if (isSelected) {
                         return "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(0, 128, 0, 1) 100%)";
                       } else {
-                        return "#fff";
+                        return "#172832";
                       }
                     };
 
