@@ -76,7 +76,7 @@ const Trainees = () => {
         </nav>
       </header>
 
-      <h1 className="trainees-title">Trainees Info</h1>
+      <h1 className="trainees-title" style={{ color: 'white' }}>Trainees Info</h1>
 
       <table className="trainees-table">
         <thead>
@@ -133,9 +133,9 @@ const TraineeRow = ({
 
   return (
     <tr>
-      <td>{trainee._id}</td>
+      <td style={{ color: 'white' }}>{trainee._id}</td>
       {["name", "nicNo", "contactNo", "email"].map((field) => (
-        <td key={field}>
+       <td key={field} style={{ color: 'white' }}>
           {isEditing ? (
             <input
               type={field === "email" ? "email" : "text"}
