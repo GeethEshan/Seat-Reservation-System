@@ -502,7 +502,7 @@ const styles = {
     width: "50px",
     height: "50px",
     outline: "none",
-    boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)" // Reduced blur and shadow spread
+    boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)", // Reduced blur and shadow spread
     borderRadius: "8px",
     backgroundColor: "#F8F8FF",
   },
