@@ -177,7 +177,7 @@ const AvailableAgain = () => {
 
         {selectedLayout && (
           <div style={styles.selectedLayoutContainer}>
-            <h3>Selected Section: {selectedLayout.layoutName}</h3>
+           <h3 style={{ color: "white" }}>Selected Section: {selectedLayout.layoutName}</h3>
             <div style={styles.seatGrid}>
               {Array.from({ length: 10 }, (_, rowIndex) => (
                 <React.Fragment key={rowIndex}>
@@ -266,6 +266,7 @@ const styles = {
   },
   sectionLabel: {
     textAlign: "center",
+    color: "white",
     margin: "0 auto",
   },
   contentContainer: {
