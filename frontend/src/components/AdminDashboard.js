@@ -216,17 +216,20 @@ const LayoutViewer = () => {
                       seat?.seatId
                     );
                     const isSelected = selectedSeatsAD.includes(seat?.seatId);
-                    const getBackgroundStyle = () => {
-                      if (isUnavailable) {
-                        return "radial-gradient(circle, rgba(255, 230, 204, 1) 0%, rgba(255, 165, 0, 1) 100%)";
-                      } else if (isReserved) {
-                        return "radial-gradient(circle, rgba(255, 200, 200, 1) 0%, rgba(255, 200, 200, 1) 30%, rgba(255, 0, 0, 1) 100%)";
-                      } else if (isSelected) {
-                        return "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(0, 128, 0, 1) 100%)";
-                      } else {
-                        return "#172832";
-                      }
-                    };
+                    const getBackgroundStyle = (seat) => {
+  if (!seat) {
+    return "#172832"; // Color for seats with no seat ID
+  } else if (isUnavailable) {
+    return "radial-gradient(circle, rgba(255, 230, 204, 1) 0%, rgba(255, 165, 0, 1) 100%)";
+  } else if (isReserved) {
+    return "radial-gradient(circle, rgba(255, 200, 200, 1) 0%, rgba(255, 200, 200, 1) 30%, rgba(255, 0, 0, 1) 100%)";
+  } else if (isSelected) {
+    return "radial-gradient(circle, rgba(204, 255, 204, 1) 0%, rgba(0, 128, 0, 1) 100%)";
+  } else {
+    return "#fff"; // Default color for available seats
+  }
+};
+
 
                     // Determine cursor style based on seat availability
                     const cursorStyle =
