@@ -339,7 +339,7 @@ const Report = () => {
             className="table-section present-section"
             style={{ flex: "1 1 300px", margin: "0 10px" }}
           >
-            <h3 style={{ color: "black" }}>The Visitors</h3>
+            <h3 style={{ color: "white" }}>The Visitors</h3>
             <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "#f0f0f0" }}>
               <thead>
                 <tr>
@@ -390,7 +390,7 @@ const Report = () => {
             className="table-section absent-section"
             style={{ flex: "1 1 300px", margin: "0 10px" }}
           >
-            <h3 style={{ color: "black" }}>The Absentees</h3>
+            <h3 style={{ color: "white" }}>The Absentees</h3>
             <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "#f0f0f0" }}>
               <thead>
                 <tr>
