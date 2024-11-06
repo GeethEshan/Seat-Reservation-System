@@ -229,6 +229,7 @@ const styles = {
   },
   currentDate: {
     fontSize: "1.2em",
+    color: 'white',
   },
   subNavBar: {
     margin: "20px 0",
