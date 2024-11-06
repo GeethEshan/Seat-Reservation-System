@@ -494,7 +494,7 @@ const styles = {
     justifyContent: "center",
     borderRadius: "5px",
     cursor: "pointer",
-    color: "white",
+    color: "black",
     boxShadow: "0px 8px 15px rgba(255, 255, 255, 0.5)", // White shadow added
   },
   emptySeatIcon: {
