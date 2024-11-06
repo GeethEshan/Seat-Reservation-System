@@ -148,7 +148,7 @@ const DateManager = () => {
 
   return (
     <div className="date-manager-container">
-      <h2 className="date-manager-title">Next 10 Weekdays</h2>
+      <h2 className="date-manager-title" style={{ color: "white" }}>Next 10 Weekdays</h2>
       <div className="date-manager-grid">
         {weekdays.map((day) => (
           <button
