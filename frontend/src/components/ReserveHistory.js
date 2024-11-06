@@ -143,7 +143,9 @@ const ReserveHistory = () => {
       />{" "}
       {/* Pass the navigate function */}
       <div className="header-info" style={styles.headerInfo}>
-        <h1 className="reserved-title">Those Who Have Reserved A Seat For :</h1>
+        <h1 className="reserved-title" style={{ color: 'white' }}>
+  Those Who Have Reserved A Seat For :
+</h1>
         <div className="current-date" style={styles.currentDate}>
           <strong>{selectedDate}</strong>
         </div>
@@ -265,6 +267,7 @@ const styles = {
   },
   sectionsLabel: {
     textAlign: "center", // Center the text horizontally
+    color: "white",
     margin: "20px 0", // Optional: add some vertical spacing
     fontSize: "1.5em", // Optional: increase font size for better visibility
     fontWeight: "bold", // Optional: make it bold for emphasis
