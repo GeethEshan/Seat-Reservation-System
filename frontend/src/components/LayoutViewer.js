@@ -492,16 +492,18 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "5px",
+    outline: "none",
+    borderRadius: "8px",
     cursor: "pointer",
     color: "black",
-    boxShadow: "0px 8px 15px rgba(255, 255, 255, 0.5)", // White shadow added
+    boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)" // Reduced blur and shadow spread
   },
   emptySeatIcon: {
     width: "50px",
     height: "50px",
-    boxShadow: "0px 8px 15px rgba(255, 255, 255, 0.5)", // White shadow added
-    borderRadius: "5px",
+    outline: "none",
+    boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)" // Reduced blur and shadow spread
+    borderRadius: "8px",
     backgroundColor: "#F8F8FF",
   },
 
