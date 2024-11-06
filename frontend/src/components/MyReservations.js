@@ -119,7 +119,7 @@ const MyReservations = () => {
         </nav>
       </header>
 
-      <h2>My Reservations</h2>
+      <h2 style={{ color: 'white' }}>My Reservations</h2>
 
       <div className="popup-container">
         {error && <div className="popup error">{error}</div>}
@@ -127,36 +127,35 @@ const MyReservations = () => {
       </div>
 
       {currentBookings.length > 0 ? (
-        <>
-          <table className="reservations-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Seat ID</th> {/* Updated column for Seat ID */}
-                <th>Layout Name</th> {/* New column for Layout Name */}
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody className="table_body">
-              {currentBookings.map((booking) => (
-                <tr key={booking._id}>
-                  <td>{formatDate(booking.bookingDate)}</td>
-                  <td>{booking.seatId}</td> {/* Display Seat ID */}
-                  <td>{booking.layoutName}</td> {/* Display Layout Name */}
-                  <td>
-                    <button
-                      className="cancel-button"
-                      onClick={() =>
-                        handleCancelClick(booking._id, booking.bookingDate)
-                      }
-                    >
-                      Cancel
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <><table className="reservations-table">
+  <thead>
+    <tr>
+      <th style={{ color: 'white' }}>Date</th>
+      <th style={{ color: 'white' }}>Seat ID</th> {/* Updated column for Seat ID */}
+      <th style={{ color: 'white' }}>Layout Name</th> {/* New column for Layout Name */}
+      <th style={{ color: 'white' }}>Action</th>
+    </tr>
+  </thead>
+  <tbody className="table_body">
+    {currentBookings.map((booking) => (
+      <tr key={booking._id}>
+        <td style={{ color: 'white' }}>{formatDate(booking.bookingDate)}</td>
+        <td style={{ color: 'white' }}>{booking.seatId}</td> {/* Display Seat ID */}
+        <td style={{ color: 'white' }}>{booking.layoutName}</td> {/* Display Layout Name */}
+        <td>
+          <button
+            className="cancel-button"
+            onClick={() =>
+              handleCancelClick(booking._id, booking.bookingDate)
+            }
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
           <div className="pagination-controls">
             <button
               className="pagination-button"
@@ -165,7 +164,9 @@ const MyReservations = () => {
             >
               Previous
             </button>
-            <span className="page-info">{`Page ${currentPage} of ${totalPages}`}</span>
+           <span className="page-info" style={{ color: 'white' }}>
+  {`Page ${currentPage} of ${totalPages}`}
+</span>
             <button
               className="pagination-button"
               onClick={() => handlePageChange(currentPage + 1)}
