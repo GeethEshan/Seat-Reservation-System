@@ -143,7 +143,7 @@ const LayoutViewer = () => {
           >
             Dashboard
           </button>
-          <h3 className="sub-nav-title">Sections</h3>
+          <h3 className="sub-nav-title" style={{ color: "white" }}>Sections</h3>
         </div>
 
         <div className="card-container2">
