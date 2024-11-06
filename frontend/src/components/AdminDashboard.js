@@ -203,7 +203,7 @@ const LayoutViewer = () => {
 
         {selectedLayoutAD && (
           <div className="selected-layout-container">
-            <h3>Selected Section: {selectedLayoutAD.layoutName}</h3>
+            <h3 style={{ color: "white" }}>Selected Section: {selectedLayoutAD.layoutName}</h3>
             <div className="seat-grid">
               {Array.from({ length: 10 }, (_, rowIndex) => (
                 <React.Fragment key={rowIndex}>
