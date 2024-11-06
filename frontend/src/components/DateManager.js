@@ -14,7 +14,7 @@ const DateManager = () => {
     const newWeekdays = [];
     let currentDate = new Date();
 
-    while (newWeekdays.length < 10) {
+    while (newWeekdays.length < 28) {
       const dayOfWeek = currentDate.getDay();
 
       // Exclude weekends (0 = Sunday, 6 = Saturday)
@@ -148,7 +148,7 @@ const DateManager = () => {
 
   return (
     <div className="date-manager-container">
-      <h2 className="date-manager-title" style={{ color: "white" }}>Next 10 Weekdays</h2>
+      <h2 className="date-manager-title" style={{ color: "white" }}>Next 28 Weekdays</h2>
       <div className="date-manager-grid">
         {weekdays.map((day) => (
           <button
