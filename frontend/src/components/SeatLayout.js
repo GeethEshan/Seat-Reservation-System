@@ -170,7 +170,7 @@ const SeatLayout = () => {
         Dashboard
       </button>
 
-      <h1>Seat Layout Designer</h1>
+      <h1 style={{ color: 'white' }}>Seat Layout Designer</h1>
 
       {/* Table for Existing Layouts and Action Buttons */}
       <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
@@ -199,11 +199,15 @@ const SeatLayout = () => {
         </table>
       </div>
 
-      <h2 className="create-new-layout-heading">Create New Layout</h2>
+      <h2 className="create-new-layout-heading" style={{ color: 'white' }}>
+  Create New Layout
+</h2>
       <div className="input-container">
         <div className="input-row">
           <div className="total-seats-container">
-            <label htmlFor="totalSeats">Total Seats (max 100): </label>
+           <label htmlFor="totalSeats" style={{ color: 'white' }}>
+  Total Seats (max 100): 
+</label>
             <input
               type="number"
               id="totalSeats"
@@ -215,7 +219,9 @@ const SeatLayout = () => {
           </div>
 
           <div className="layout-name-container">
-            <label htmlFor="layoutName">Layout Name: </label>
+            <label htmlFor="layoutName" style={{ color: 'white' }}>
+  Layout Name: 
+</label>
             <input
               type="text"
               id="layoutName"
@@ -228,7 +234,7 @@ const SeatLayout = () => {
 
       <div className="layout-container">
         <div className="drag-seats">
-          <h3>Drag Seats:</h3>
+          <h3 style={{ color: 'white' }}>Drag From Here:</h3>
           <div className="seat-icons">
             {availableSeats.map((seatId) => {
               const isOccupied = seatPositions.some((seat) => seat.seatId === seatId);
@@ -238,7 +244,7 @@ const SeatLayout = () => {
         </div>
 
         <div className="grid-layout">
-          <h3>Grid Layout:</h3>
+         <h3 style={{ color: 'white' }}>Drop Here In The Grid Layout:</h3>
           <Grid squares={squares} seatPositions={seatPositions} onDrop={handleDrop} />
         </div>
       </div>
