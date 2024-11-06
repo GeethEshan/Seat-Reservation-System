@@ -216,8 +216,8 @@ const AvailableAgain = () => {
                           cursor: seat ? "pointer" : "not-allowed",
                           border:
                             isSelected && isUnavailable
-                              ? "2px solid black"
-                              : "1px solid #ccc", // Apply black border for selected unavailable seats
+                             ? "2px solid green" // Apply green border with 2px thickness for selected unavailable seats
+                             : "1px solid #ccc"; // Default border for other seats
                         }}
                       >
                         {seat?.seatId}
