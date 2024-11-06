@@ -495,12 +495,12 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
     color: "black",
-    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.5)", // Heavy shadow added
+    boxShadow: "0px 8px 15px rgba(255, 255, 255, 0.5)", // White shadow added
   },
   emptySeatIcon: {
     width: "50px",
     height: "50px",
-    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.5)",
+    boxShadow: "0px 8px 15px rgba(255, 255, 255, 0.5)", // White shadow added
     borderRadius: "5px",
     backgroundColor: "#F8F8FF",
   },
